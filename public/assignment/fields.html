@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Branden's page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+
+    <!-- My custom styles -->
+    <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Branden Rodgers</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li class="active"><a href="forms.html">Forms <span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Forms: Registration Form</h1>
+
+            <div>
+                <ul class="nav nav-tabs">
+                    <li role="presentation"><a href="forms.html">Forms</a></li>
+                    <li role="presentation" class="active"><a href="fields.html">Fields</a></li>
+                </ul>
+            </div>
+            <div>
+                <form role="form">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name"/>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-lg"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name"/>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-lg"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Date of Birth:</label>
+                                <div class="input-group date" id="datetimepicker1">
+                                    <input type='text' class="form-control" placeholder="Select Date"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-lg"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Gender:</label>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Male</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Male</a></li>
+                                    <li><a href="#">Female</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-lg"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Roles:</label>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">Admin</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">Student</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">User</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-lg"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>License Agreement:</label>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio">Yes</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio">No</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-pencil glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-remove glyphicon-lg"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-lg"></span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Add New Field:</label>
+                            <div class="dropdown">
+                                <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">Single Line Text
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Single Line Text</a></li>
+                                    <li><a href="#">Date</a></li>
+                                    <li><a href="#">Dropdown</a></li>
+                                    <li><a href="#">Checkboxes</a></li>
+                                    <li><a href="#">Radio Buttons</a></li>
+                                    <li><a href="#">Paragraph Text Field</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 icons-right">
+                            <span class="glyphicon glyphicon-plus glyphicon-lg"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-1.12.0.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="../../assets/js/vendor/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
