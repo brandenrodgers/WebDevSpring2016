@@ -1,8 +1,40 @@
 
+/* TO ADD OR REMOVE PADDING / MARGINS */
+.pad-top {
+    padding-top: 10px;
+}
+
+.remove-spacing {
+    padding: 0;
+    margin: 0;
+}
+
+/* FOR GLYPHICONS */
 .glyphicon-lg {
     font-size: 1.5em;
 }
 
 .icons-right {
     text-align: right;
+}
+
+.glyph-btn:hover {
+    color: #2f5eff;
+    cursor: pointer;
+}
+
+/* FOR ALIGNMENT */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .vertical-align {
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* IF we want vertical align no matter what the screen size is */
+.vertical-align-xs {
+    display: flex;
+    align-items: center;
 }
