@@ -24,7 +24,6 @@
         }
 
         function getMovieData(imdbID){
-            console.log(imdbID);
             $http.get("http://www.omdbapi.com/?i=" + imdbID)
                 .success(updateMovieInfo);
         }
