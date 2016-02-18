@@ -13,6 +13,7 @@
     <a href="/">Home</a>
     <hr>
     <div class="container" ng-controller="ExperimentsController">
+        <h4>{{header}}</h4>
         <div class="form-inline">
             <div class="form-group">
                 <label for="num1">Number 1: </label>
@@ -25,6 +26,45 @@
             <button class="btn btn-primary btn-block" ng-click="addIntegers(num1, num2)">Add Numbers</button>
             <h2>Result = {{result}}</h2>
         </div>
+        <br/>
+        <input ng-model="title" type="text" placeholder="movie">
+        <button class="btn btn-primary btn-block" ng-click="search(title)">Search</button>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Title</th>
+                            <th>imdbID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="movie in data.Search">
+                            <td><img ng-mouseover="getMovieData(movie.imdbID)" ng-src="{{movie.Poster}}" height="100px"/></td>
+                            <td>{{movie.Title}}</td>
+                            <td>{{movie.imdbID}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4" style="border:solid 2px black">
+                <div>
+                    <h4>Title: </h4>
+                    <span>{{movieTitle}}</span>
+                </div>
+                <div>
+                    <h4>Director: </h4>
+                    <span>{{movieDirector}}</span>
+                </div>
+                <div>
+                    <h4>Plot: </h4>
+                    <span>{{moviePlot}}</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
