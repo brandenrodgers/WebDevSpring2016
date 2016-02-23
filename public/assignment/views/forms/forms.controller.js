@@ -8,6 +8,8 @@
 
     function FormController($scope, $rootScope, FormService){
 
+        $scope.form = null;
+
         FormService.findAllFormsForUser($rootScope.currentUser._id, function(result){
             $scope.availableForms = result;
         });
@@ -18,30 +20,33 @@
         $scope.selectForm = selectForm;
 
         function addForm(){
-            var newForm = {
-                title: $scope.formName
-            };
-            FormService.createFormForUser($rootScope.currentUser._id, newForm, function(result){
+            FormService.createFormForUser($rootScope.currentUser._id, $scope.form, function(result){
                 $scope.availableForms.push(result);
-                $scope.formName = "";
-                console.log("added Form " + result.title);
+                $scope.form = null;
             });
         }
 
         function updateForm(){
-            console.log("Update Form");
+            FormService.updateFormById($scope.availableForms[$scope.selectedFormIndex]._id, $scope.form, function(result){
+                $scope.form = null;
+            });
         }
 
         function deleteForm(index){
             FormService.deleteFormById($scope.availableForms[index]._id, function(result){
                 $scope.availableForms.splice(index, 1);
-                console.log("delete Form");
+                $scope.form = null;
             });
 
         }
 
         function selectForm(index){
-            console.log("select Form at " + index);
+            $scope.selectedFormIndex = index;
+            $scope.form = {
+                _id: $scope.availableForms[index]._id,
+                title: $scope.availableForms[index].title,
+                userId: $scope.availableForms[index].userId
+            };
         }
 
     }

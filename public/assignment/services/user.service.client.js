@@ -76,7 +76,6 @@
                     break;
                 }
             }
-            console.log("updated user: " + user.username);
             callback(user);
         }
 

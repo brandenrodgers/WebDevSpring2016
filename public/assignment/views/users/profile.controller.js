@@ -13,6 +13,8 @@
 
         $scope.currentUser = UserService.getCurrentUser();
 
+        var preservedUserInfo = preserveInfo($scope.currentUser);
+
         if(!$scope.currentUser) {
             $location.url("/home");
         }
@@ -25,21 +27,32 @@
 
             if (!$scope.currentUser.username){
                 $scope.errorMessage = "Username cannot be empty";
+                $scope.currentUser.username = preservedUserInfo.username;
                 return;
             }
             if (!$scope.currentUser.password){
                 $scope.errorMessage = "Password cannot be empty";
-                return;
-            }
-            if ($scope.currentUser.email && $scope.currentUser.email.indexOf("@") == -1){
-                $scope.errorMessage = "Invalid email address";
+                $scope.currentUser.password = preservedUserInfo.password;
                 return;
             }
 
             UserService.updateUser($scope.currentUser._id, $scope.currentUser, function(newUser){
                 UserService.setCurrentUser(newUser);
+                preservedUserInfo = preserveInfo(newUser);
                 $scope.message = "Profile Successfully Updated";
             });
+        }
+
+        function preserveInfo(user){
+            return {
+                _id: user._id,
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                roles: user.roles,
+                email: user.email
+            };
         }
 
     }
