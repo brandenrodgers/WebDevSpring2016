@@ -1,5 +1,4 @@
 
-
 <nav ng-controller="HeaderController" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,11 +12,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'hidden' : $root.currentUser !== undefined}"><a href="#/register">Register</a></li>
-                <li ng-class="{'hidden' : $root.currentUser !== undefined}"><a href="#/login">Login</a></li>
-                <li ng-class="{'hidden' : $root.currentUser === undefined}"><a href="#/profile">{{$root.currentUser.username}}</a></li>
-                <li ng-class="{'hidden' : $root.currentUser === undefined}"><a ng-click="$root.currentUser = undefined" href="#/home">Logout</a></li>
-                <li ng-class="{'hidden' : $root.currentUser === undefined || $root.currentUser.roles.indexOf('admin') == -1}"><a href="#/admin">Admin</a></li>
+                <li ng-hide="currentUser"><a href="#/register">Register</a></li>
+                <li ng-hide="currentUser"><a href="#/login">Login</a></li>
+                <li ng-show="currentUser"><a href="#/profile">{{currentUser.username}}</a></li>
+                <li ng-show="currentUser"><a ng-click="logout()">Logout</a></li>
+                <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0"><a href="#/admin">Admin</a></li>
             </ul>
         </div>
     </div>

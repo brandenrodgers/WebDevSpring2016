@@ -3,34 +3,36 @@
     <h1 class="page-header">Register</h1>
 
     <div>
+        <div ng-show="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="inputUName" class="col-sm-2 control-label">Username:</label>
                 <div class="col-sm-10">
-                    <input ng-model="inputUName" type="text" class="form-control" id="inputUName" placeholder="Username">
+                    <input ng-model="user.username" type="text" class="form-control" id="inputUName" placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPwd" class="col-sm-2 control-label">Password:</label>
                 <div class="col-sm-10">
-                    <input ng-model="inputPwd" type="password" class="form-control" id="inputPwd" placeholder="Password">
+                    <input ng-model="user.password" type="password" class="form-control" id="inputPwd" placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPwdVerify" class="col-sm-2 control-label">Verify Password:</label>
                 <div class="col-sm-10">
-                    <input ng-model="inputPwdVerify" type="password" class="form-control" id="inputPwdVerify" placeholder="Verify Password">
+                    <input ng-model="user.password2" type="password" class="form-control" id="inputPwdVerify" placeholder="Verify Password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
                 <div class="col-sm-10">
-                    <input ng-model="inputEmail" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    <input ng-model="user.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="register()" class="btn btn-primary" type="submit" role="button">Register</a>
+                    <a ng-click="register(user)" class="btn btn-primary" type="submit" role="button">Register</a>
                 </div>
             </div>
         </form>

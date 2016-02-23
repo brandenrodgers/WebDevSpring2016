@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService(){
+    function UserService($rootScope){
         var currentUsers = [];
 
         currentUsers = [
@@ -18,6 +18,8 @@
         ];
 
         var service = {
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
@@ -26,6 +28,14 @@
         };
 
         return service;
+
+        function setCurrentUser(user){
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser(){
+            return $rootScope.currentUser;
+        }
 
         function findUserByCredentials(username, password, callback){
             var result = null;
@@ -60,24 +70,14 @@
         }
 
         function updateUser(userId, user, callback){
-            var newUser = {};
             for (var i=0; i < currentUsers.length; i++){
                 if (currentUsers[i]._id == userId){
-                    currentUsers[i].firstName = user.firstName;
-                    currentUsers[i].lastName = user.lastName;
-                    currentUsers[i].username = user.username;
-                    currentUsers[i].password = user.password;
-                    currentUsers[i].roles = user.roles;
-                    newUser = currentUsers[i];
-                    console.log("updated user info");
-                    console.log("first: " + newUser.firstName);
-                    console.log("last: " + newUser.lastName);
-                    console.log("username: " + newUser.username);
-                    console.log("password: " + newUser.password);
+                    currentUsers[i] = user;
                     break;
                 }
             }
-            callback(newUser);
+            console.log("updated user: " + user.username);
+            callback(user);
         }
 
     }

@@ -6,27 +6,39 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService){
-        var currentUser = $rootScope.currentUser ? $rootScope.currentUser : {}; //TODO this might be wrong!!!
+    function ProfileController($scope, $location, UserService){
 
-        $scope.inputUName = currentUser.username;
-        $scope.inputPwd = currentUser.password;
-        $scope.inputFName = currentUser.firstName;
-        $scope.inputLName = currentUser.lastName;
+        $scope.message = null;
+        $scope.errorMessage = null;
+
+        $scope.currentUser = UserService.getCurrentUser();
+
+        if(!$scope.currentUser) {
+            $location.url("/home");
+        }
 
         $scope.update = update;
 
-
         function update(){
-            var userInfo = {
-                firstName: $scope.inputFName,
-                lastName: $scope.inputLName,
-                username: $scope.inputUName,
-                password: $scope.inputPwd
-            };
+            $scope.message = null;
+            $scope.errorMessage = null;
 
-            UserService.updateUser(currentUser._id, userInfo, function(newUser){
-                $rootScope.currentUser = newUser;
+            if (!$scope.currentUser.username){
+                $scope.errorMessage = "Username cannot be empty";
+                return;
+            }
+            if (!$scope.currentUser.password){
+                $scope.errorMessage = "Password cannot be empty";
+                return;
+            }
+            if ($scope.currentUser.email && $scope.currentUser.email.indexOf("@") == -1){
+                $scope.errorMessage = "Invalid email address";
+                return;
+            }
+
+            UserService.updateUser($scope.currentUser._id, $scope.currentUser, function(newUser){
+                UserService.setCurrentUser(newUser);
+                $scope.message = "Profile Successfully Updated";
             });
         }
 

@@ -6,18 +6,29 @@
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $rootScope, $location, UserService){
+    function RegisterController($scope, $location, UserService){
+
+        $scope.errorMessage = null;
 
         $scope.register = register;
 
-        function register(){
-            var userInfo = {
-                username: $scope.inputUName,
-                password: $scope.inputPwd
-            };
+        function register(user){
 
-            UserService.createUser(userInfo, function(newUser){
-                $rootScope.currentUser = newUser;
+            if(!user.username){
+                $scope.errorMessage = "Please provide a username";
+                return;
+            }
+            if(!user.password || !user.password2){
+                $scope.errorMessage = "Please provide a password";
+                return;
+            }
+            if(user.password !== user.password2){
+                $scope.errorMessage = "Passwords must match";
+                return;
+            }
+
+            UserService.createUser(user, function(newUser){
+                UserService.setCurrentUser(newUser);
                 $location.url("/profile");
             });
 

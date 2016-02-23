@@ -3,23 +3,24 @@
     <h1 class="page-header">Login</h1>
 
     <div>
+        <div ng-show="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+
         <form class="form-horizontal">
             <div class="form-group">
                 <label for="inputUName" class="col-sm-2 control-label">Username:</label>
                 <div class="col-sm-10">
-                    <input ng-model="inputUName" type="text" class="form-control" id="inputUName" placeholder="Username">
+                    <input ng-model="user.username" type="text" class="form-control" id="inputUName" placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPwd" class="col-sm-2 control-label">Password:</label>
                 <div class="col-sm-10">
-                    <input ng-model="inputPwd" type="password" class="form-control" id="inputPwd" placeholder="Password">
+                    <input ng-model="user.password" type="password" class="form-control" id="inputPwd" placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="login()" class="btn btn-primary" type="submit" role="button">Login</a>
-                    <span class="text-danger">{{errorMessage}}</span>
+                    <a ng-click="login(user)" class="btn btn-primary" type="submit" role="button">Login</a>
                 </div>
             </div>
         </form>
