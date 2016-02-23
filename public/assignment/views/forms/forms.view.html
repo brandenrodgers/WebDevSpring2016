@@ -19,32 +19,18 @@
             <tbody>
                 <tr>
                     <td>
-                        <input type="text" class="form-control" id="formName" placeholder="Name">
+                        <input ng-model="formName" type="text" class="form-control" id="formName" placeholder="Name">
                     </td>
                     <td class="icons-right">
-                        <span class="glyphicon glyph-btn glyphicon-plus glyphicon-lg"></span>
-                        <span class="glyphicon glyph-btn glyphicon-ok glyphicon-lg"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Registration Form</td>
-                    <td class="icons-right">
-                        <span class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
-                        <span class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
+                        <span ng-click="addForm()" class="glyphicon glyph-btn glyphicon-plus glyphicon-lg"></span>
+                        <span ng-click="updateForm()" class="glyphicon glyph-btn glyphicon-ok glyphicon-lg"></span>
                     </td>
                 </tr>
-                <tr>
-                    <td>Contact List</td>
+                <tr ng-repeat="form in availableForms">
+                    <td>{{form.title}}</td>
                     <td class="icons-right">
-                        <span class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
-                        <span class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>To Do List</td>
-                    <td class="icons-right">
-                        <span class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
-                        <span class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
+                        <span ng-click="deleteForm($index)" class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
+                        <span ng-click="selectForm($index)" class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
                     </td>
                 </tr>
             </tbody>
