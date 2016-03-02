@@ -55,7 +55,7 @@
         function createUser(user, callback){
             user._id = (new Date).getTime();
             currentUsers.push(user);
-            console.log("created new user: " + user.username);
+            console.log("created new users: " + user.username);
             callback(user);
         }
 
