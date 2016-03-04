@@ -2,39 +2,40 @@
     <div class="wrap">
         <div class="col_1_of_login span_1_of_login">
             <h4 class="title">New Users</h4>
-            <p>Create an account to get access to tons of new features. Favorite deals and coupons, auto-complete searches, get recommendations, and much more!</p>
+            <p>Create an account to get access to tons of additional features. Here are a few of the things you will gain access to:</p>
+            <ul class="login-new-user-text">
+                <li>Favorite deals and coupons</li>
+                <li>Save location for quicker searches</li>
+                <li>Get recommendations</li>
+                <li>Browse local deals</li>
+                <li>And much more!</li>
+            </ul>
             <div class="button1">
-                <a href="#/register"><input type="submit" name="Submit" value="Create an Account"></a>
+                <a href="#/register"><input type="submit" value="Create an Account"></a>
             </div>
             <div class="clear"></div>
         </div>
         <div class="col_1_of_login span_1_of_login">
             <div class="login-title">
                 <h4 class="title">Registered Users</h4>
-                <div class="loginbox">
-                    <div ng-show="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
-
-                    <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="inputUName" class="col-sm-3 control-label">Username: </label>
-                            <div class="col-sm-8">
-                                <input ng-model="model.user.username" type="text" class="form-control" id="inputUName" placeholder="Username">
+                <div id="loginbox" class="loginbox">
+                    <form name="login" id="login-form">
+                        <fieldset class="input">
+                            <p id="login-form-username">
+                                <label for="inputUName">Username</label>
+                                <input id="inputUName" ng-model="model.user.username" type="text" class="inputbox" size="18" autocomplete="off">
+                            </p>
+                            <p id="login-form-password">
+                                <label for="inputPwd">Password</label>
+                                <input id="inputPwd" ng-model="model.user.password" type="password" class="inputbox" size="18" autocomplete="off">
+                            </p>
+                            <div class="login-error" ng-show="model.errorMessage">{{model.errorMessage}}</div>
+                            <div class="login-button">
+                                <input type="submit" ng-click="model.login(model.user)" class="button login-button" value="Login">
+                                <div class="clear"></div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPwd" class="col-sm-3 control-label">Password: </label>
-                            <div class="col-sm-8">
-                                <input ng-model="model.user.password" type="password" class="form-control" id="inputPwd" placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-8">
-                                <a ng-click="model.login(model.user);" class="btn btn-primary btn-block" role="button">Login</a>
-                            </div>
-                        </div>
+                        </fieldset>
                     </form>
-                    </div>
                 </div>
             </div>
         </div>

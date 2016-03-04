@@ -1,18 +1,26 @@
 <div class="register_account">
     <div class="wrap">
         <h4 class="title">Create an Account</h4>
+        <p class="register-required-field">* = Required Field</p>
         <form>
             <div class="col_1_of_2 span_1_of_2">
-                <div><input type="text" placeholder="Name"></div>
-                <div><input type="text" placeholder="Email"></div>
-                <div><input type="text" placeholder="password"></div>
-                <div><input type="text" placeholder="verify password"></div>
+                <div><input ng-model="model.user.username" ng-class="{'register-error-box' : model.usernameBox}" type="text" placeholder="Username">
+                    <span class="register-required-field">*</span>
+                </div>
+                <div><input ng-model="model.user.password" ng-class="{'register-error-box' : model.passwordBox}" type="password" placeholder="Password">
+                    <span class="register-required-field">*</span>
+                </div>
+                <div><input ng-model="model.user.password2" ng-class="{'register-error-box' : model.password2Box}" type="password" placeholder="Verify password">
+                    <span class="register-required-field">*</span>
+                </div>
             </div>
             <div class="col_1_of_2 span_1_of_2">
-                <div><input type="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
-                <div><input type="text" value="City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}"></div>
+                <div><input ng-model="model.user.email" type="text" placeholder="Email"></div>
+                <div><input ng-model="model.user.city" type="text" placeholder="City"></div>
+                <div><input ng-model="model.user.state" type="text" placeholder="State"></div>
+                <div class="register-error-txt" ng-show="model.errorMessage">{{model.errorMessage}}</div>
+                <button ng-click="model.register(model.user)" class="grey">Submit</button>
             </div>
-            <button class="grey">Submit</button>
             <div class="clear"></div>
         </form>
     </div>

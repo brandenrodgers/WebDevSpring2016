@@ -6,7 +6,7 @@
         .module("CheapEatsApp")
         .controller("SearchController", searchController);
 
-    function searchController($location, $http) {
+    function searchController(SqootService) {
         var vm = this;
 
         vm.search = search;
@@ -19,7 +19,10 @@
         vm.currentSearchInfo = {};
 
         function init() {
-            getDeals();
+            var searchInfo = {
+                location: "Boston"
+            };
+            search(searchInfo);
         }
         init();
 
@@ -27,8 +30,8 @@
         function search(searchInfo){
             vm.currentSearchInfo = searchInfo;
             var data = {
-                location: searchInfo.location,
-                radius: searchInfo.radius,
+                location: searchInfo.location || null,
+                radius: searchInfo.radius || null,
                 per_page: 12,
                 category_slugs: "restaurants",
                 page: vm.currentPage
@@ -38,34 +41,17 @@
                 params: data
             };
 
-            $http.get("http://api.sqoot.com/v2/deals/?api_key=30el0r", config).then(function(response) {
-                sortResults(response.data.deals);
-            }, function(response) {
-            });
+            SqootService
+                .searchDeals(config)
+                .then(function(response) {
+                    sortResults(response.data.deals);
+                });
         }
 
-
-        function getDeals() {
-            var data = {
-                location: "Boston",
-                category_slugs: "restaurants",
-                per_page: 12
-            };
-
-            var config = {
-                params: data
-            };
-
-            $http.get("http://api.sqoot.com/v2/deals/?api_key=30el0r", config).then(function(response) {
-                sortResults(response.data.deals);
-            }, function(response) {
-            });
-        }
 
         function sortResults(deals){
             var result = [];
             for(var i=0; i < deals.length; i+=3){
-                console.log(i);
                 result.push(deals.slice(i, i+3));
             }
             vm.dealGroups = result;
@@ -73,14 +59,12 @@
 
         function nextPage(searchInfo){
             vm.currentPage += 1;
-            console.log("next page");
             search(vm.currentSearchInfo);
         }
 
         function previousPage(searchInfo){
             if (vm.currentPage > 1) {
                 vm.currentPage -= 1;
-                console.log("previous page");
                 search(vm.currentSearchInfo);
             }
         }

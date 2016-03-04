@@ -949,7 +949,7 @@ h4.title{
 	border-bottom: 1px solid #DFDDDD;
 	padding-bottom: 13px;
 }
-input.inputbox, input.required, div.k2AccountPage input[type="text"] {
+input.inputbox, input.required, div.k2AccountPage input[type="password"], input[type="text"] {
 	background: #FFF;
 	border: 1px solid #BDBCBC;
 	color: inherit;
@@ -977,9 +977,6 @@ input.inputbox, input.required, div.k2AccountPage input[type="text"] {
 }
 #login-form label a:hover{
 	text-decoration:none;
-}
-p#login-form-remember{
-	float:left;
 }
 fieldset.input input[type="submit"] {
 	background:#555;
@@ -1010,9 +1007,20 @@ fieldset.input input[type="submit"]:hover, .button1 input[type="submit"]:hover{
 	outline:none;
 	font-size:1em;
 }
-.remember{
-	margin-top: 6%;
+.login-button{
+	margin-top: 4%;
+	width: 100px;
 }
+
+.login-error{
+	margin-top: 1%;
+	color: red;
+}
+
+.login-new-user-text{
+	list-style: circle;
+}
+
 /*--register-form--*/
 table {
 	border-collapse: collapse;
@@ -1024,6 +1032,20 @@ table {
 }
 .register_account table td {
 	width: 100%;
+}
+.register_account form input[type="password"], .register_account form select {
+	font-size:0.95em;
+	color:#777;
+	padding: 8px;
+	outline: none;
+	margin:10px 0;
+	width:91%;
+	font-family: 'Exo 2', sans-serif;
+	border:none;
+	box-shadow:0 0 2px #aaa;
+	-webkit-box-shadow:0 0 2px #aaa;
+	-moz-box-shadow:0 0 2px #aaa;
+	-o-box-shadow:0 0 2px #aaa;
 }
 .register_account form input[type="text"], .register_account form select {
 	font-size:0.95em;
@@ -1039,16 +1061,17 @@ table {
 	-moz-box-shadow:0 0 2px #aaa;
 	-o-box-shadow:0 0 2px #aaa;
 }
-.register_account form input[type="text"]:hover, .register_account form select:hover {
+
+.register_account form input[type="password"]:hover, input[type="text"]:hover, .register_account form select:hover {
 	box-shadow:0 0 4px #aaa;
 	-webkit-box-shadow:0 0 4px #aaa;
 	-moz-box-shadow:0 0 4px #aaa;
 	-o-box-shadow:0 0 4px #aaa;
 }
-.register_account form input[type="text"].code {
+.register_account form input[type="password"].code, input[type="text"].code {
 	width: 15%;
 }
-.register_account form input[type="text"].number {
+.register_account form input[type="password"].number, input[type="text"].number {
 	width: 69.8%;
 }
 p.terms a, p.note a {
@@ -1079,7 +1102,7 @@ button.grey:hover {
 	background:#4CB1CA;
 	color: #FFF;
 }
-.register_account form input[type="text"].code {
+.register_account form input[type="text"].code, input[type="text"].code {
 	width: 15%;
 }
 p.code{
@@ -1097,6 +1120,26 @@ p.cart a{
 p.cart a:hover{
 	text-decoration:none;
 }
+
+.register-required-field{
+	color: red;
+	font-size: 15px;
+}
+
+span.register-required-field{
+	margin-left: 2px;
+	font-size: 20px;
+}
+
+.register-error-box{
+	border: 1px solid red !important;
+}
+
+.register-error-txt{
+	margin-top: 1%;
+	color: red;
+}
+
 /*--mens--*/
 .mens-toolbar {
 	margin: 0 0 12px;

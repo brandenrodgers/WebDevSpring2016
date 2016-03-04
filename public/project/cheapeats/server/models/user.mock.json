@@ -1,0 +1,34 @@
+[
+  {
+    "_id": 11111,
+    "username": "branden",
+    "password": "branden",
+    "firstName": "Branden",
+    "lastName": "Rodgers",
+    "email": "branden@fakemail.com"
+  },
+  {
+    "_id": 22222,
+    "username": "brian",
+    "password": "brian",
+    "firstName": "brian",
+    "lastName": "Cox",
+    "email": "brian@fakemail.com"
+  },
+  {
+    "_id": 33333,
+    "username": "ray",
+    "password": "ray",
+    "firstName": "Ray",
+    "lastName": "O'Connor",
+    "email": "ray@fakemail.com"
+  },
+  {
+    "_id": 44444,
+    "username": "allison",
+    "password": "allison",
+    "firstName": "Allison",
+    "lastName": "Kulas",
+    "email": "allison@fakemail.com"
+  }
+]

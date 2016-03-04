@@ -6,7 +6,7 @@
         .module("CheapEatsApp")
         .controller("LoginController", loginController);
 
-    function loginController($location) {
+    function loginController(UserService, $location) {
         var vm = this;
 
         vm.errorMessage = null;
@@ -18,8 +18,33 @@
         init();
 
         function login(user) {
-            console.log("Logged in: " + user.username);
-            $location.url("/profile");
+            if(!user) {
+                vm.errorMessage = "Enter a username and password";
+                return;
+            }
+            if (!user.username){
+                vm.errorMessage = "Enter a username";
+                return;
+            }
+            if(!user.password){
+                vm.errorMessage = "Enter a password";
+                return;
+            }
+            UserService
+                .login({
+                    username: user.username,
+                    password: user.password
+                })
+                .then(function(response){
+                    if(response.data) {
+                        UserService.setCurrentUser(response.data);
+                        vm.errorMessage = null;
+                        $location.url("/profile");
+                    }
+                    else{
+                        vm.errorMessage = "Unknown username or password"
+                    }
+                });
         }
     }
 })();

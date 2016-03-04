@@ -1,16 +1,77 @@
-<div>
-    <table>
-        <thead>
-        <tr>
-            <td>Username</td>
-            <td>Password</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>uname</td>
-            <td>pwd</td>
-        </tr>
-        </tbody>
-    </table>
+<h2 class="head">User Profile</h2>
+<div ng-show="message" class="alert alert-success">{{message}}</div>
+<div ng-show="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="inputUName" class="col-sm-2 control-label">Username:</label>
+        <div class="col-sm-10">
+            <input ng-model="model.profile.username" type="text" class="form-control" id="inputUName" placeholder="Username">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPwd" class="col-sm-2 control-label">Password:</label>
+        <div class="col-sm-10">
+            <input  ng-model="model.profile.password" type="text" class="form-control" id="inputPwd" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
+        <div class="col-sm-10">
+            <input ng-model="model.profile.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputCity" class="col-sm-2 control-label">City:</label>
+        <div class="col-sm-10">
+            <input ng-model="model.profile.city" type="text" class="form-control" id="inputCity" placeholder="City">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputState" class="col-sm-2 control-label">State:</label>
+        <div class="col-sm-10">
+            <input ng-model="model.profile.state" type="text" class="form-control" id="inputState" placeholder="State">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <a ng-click="model.update()" class="btn btn-primary" type="submit" role="button">Update</a>
+        </div>
+    </div>
+</form>
+
+<div class="main">
+    <div class="wrap">
+        <div class="section group">
+            <div class="cont span_3_of_3">
+                <h2 class="head">Favorited Deals</h2>
+                <div class="top-box">
+                    <div ng-repeat="deal in model.profile.favoritesDeals" class="col_1_of_3 span_1_of_3">
+                        <a href="{{deal.deal.url}}">
+                            <div class="inner_content clearfix">
+                                <div class="product_image">
+                                    <img ng-src="{{deal.image_url}}" alt=""/>
+                                </div>
+                                <div class="price">
+                                    <div class="cart-left">
+                                        <p class="title">{{deal.short_title}}</p>
+                                        <div class="price1">
+                                            <span class="reducedfrom">${{deal.price + deal.discount_amount}}</span>
+                                            <span class="actual">${{deal.price}}</span>
+                                        </div>
+                                    </div>
+                                    <a href="#/details/{{deal.id}}">
+                                        <div class="plus-right"></div>
+                                    </a>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
 </div>

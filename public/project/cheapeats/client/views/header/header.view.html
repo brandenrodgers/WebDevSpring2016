@@ -1,5 +1,5 @@
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-<div class="header-top">
+<div ng-controller="HeaderController as model" class="header-top">
     <div class="wrap">
         <div class="header-top-left">
             <div class="slogan">Eat Better, For Less</div>
@@ -7,10 +7,10 @@
         </div>
         <div class="cssmenu">
             <ul>
-                <li class="active"><a href="#/profile">Profile</a></li> |
-                <li><a href="#/login">Log In</a></li> |
-                <li><a href="#/register">Sign Up</a></li> |
-                <li><a href="#/home">Sign Out</a></li>
+                <li ng-show="currentUser" class="active"><a href="#/profile">{{currentUser.username}}</a></li> |
+                <li ng-hide="currentUser"><a href="#/login">Log In</a></li> |
+                <li ng-hide="currentUser"><a href="#/register">Sign Up</a></li> |
+                <li ng-show="currentUser"><a ng-click="model.logout()">Sign Out</a></li>
             </ul>
         </div>
         <div class="clear"></div>
@@ -27,6 +27,7 @@
                     <li><a href="#/home">Home</a></li>
                     <li><a href="#/deals">Deals</a></li>
                     <li><a href="#">Coupons</a></li>
+                    <li ng-show="currentUser"><a href="#">Local</a></li>
                 </ul>
             </div>
         </div>

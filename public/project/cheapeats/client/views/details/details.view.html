@@ -1,0 +1,40 @@
+<div class="main">
+    <div class="wrap">
+        <div class="cont span_3_of_3">
+            <div class="grid images_3_of_2">
+                <img class="etalage_thumb_image" ng-src="{{model.data.image_url}}" class="img-responsive" />
+                <div class="clearfix"></div>
+            </div>
+            <div class="desc1 span_3_of_2">
+                <h3 class="m_3">{{model.data.title}}</h3>
+                <p class="m_5">${{model.data.price}}
+                    <span class="reducedfrom">${{model.data.price + model.data.discount_amount}}</span>
+                    <a href="{{model.data.url}}">Click to Redeem</a>
+                </p>
+                <div class="btn_form">
+                    <form>
+                        <input ng-click="model.favoriteDeal(model.data)" type="submit" value="Favorite">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </form>
+                </div>
+                <p class="m_4">Expires: {{model.data.expires_at}}</p>
+                <p class="m_4">Deal: {{model.data.short_title}}</p>
+            </div>
+            <div class="clear"></div>
+            <div class="toogle">
+                <h3 class="m_3">Deal Details</h3>
+                <p class="m_text">{{model.data.description}}</p>
+            </div>
+            <div ng-if="model.dealFavoritesByUsers" class="toogle">
+                <h3 class="m_3">Other Users who Favorited this Deal</h3>
+                <ul>
+                    <li ng-repeat="user in model.dealFavoritesByUsers">
+                    {{user.username}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
