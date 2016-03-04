@@ -9,8 +9,7 @@
     function sqootService($http) {
         var api = {
             searchDeals: searchDeals,
-            getDealById: getDealById,
-            searchCoupons: searchCoupons
+            getDealById: getDealById
         };
         return api;
 
@@ -20,10 +19,6 @@
 
         function getDealById(dealId) {
             return $http.get("http://api.sqoot.com/v2/deals/" + dealId + "/?api_key=30el0r");
-        }
-
-        function searchCoupons(params) {
-            return $http.get("http://api.sqoot.com/v2/coupons/?api_key=30el0r", params);
         }
     }
 })();

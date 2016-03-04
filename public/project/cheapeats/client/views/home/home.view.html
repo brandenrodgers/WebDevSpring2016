@@ -28,26 +28,6 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                <h2 class="head">Featured Coupons</h2>
-                <div ng-repeat="couponGroup in model.couponGroups" class="top-box">
-                    <div ng-repeat="coupon in couponGroup" class="col_1_of_3 span_1_of_3">
-                        <a href="{{coupon.coupon.url}}">
-                            <div class="inner_content clearfix">
-                                <div class="product_image">
-                                    <img ng-src="{{coupon.coupon.image_url}}" alt=""/>
-                                </div>
-                                <div class="price">
-                                    <div class="cart-left">
-                                        <p class="title">{{coupon.coupon.title}}</p>
-                                    </div>
-                                    <div class="plus-right"> </div>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="clear"></div>
-                </div>
             </div>
             <div class="clear"></div>
         </div>

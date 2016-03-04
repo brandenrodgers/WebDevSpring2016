@@ -10,7 +10,6 @@
         var vm = this;
 
         vm.dealGroups = [];
-        vm.couponGroups = [];
 
         function init() {
             var searchInfo = {
@@ -21,7 +20,6 @@
                 order: "updated_at"
             };
             getFeaturedDeals(searchInfo);
-            getFeaturedCoupons({per_page:6});
         }
         init();
 
@@ -37,19 +35,6 @@
                     vm.dealGroups = sortResults(response.data.deals);
                 });
         }
-
-        function getFeaturedCoupons(searchInfo){
-            var config = {
-                params: searchInfo
-            };
-
-            SqootService
-                .searchCoupons(config)
-                .then(function(response) {
-                    vm.couponGroups = sortResults(response.data.coupons);
-                });
-        }
-
 
         function sortResults(deals){
             var result = [];
