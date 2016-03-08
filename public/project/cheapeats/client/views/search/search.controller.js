@@ -6,6 +6,8 @@
         .module("CheapEatsApp")
         .controller("SearchController", searchController);
 
+    var currentPage = 1;
+
     function searchController(SqootService, $location, $anchorScroll) {
         var vm = this;
 
@@ -18,9 +20,9 @@
 
         vm.errorMessage = null;
         vm.dealGroups = [];
-        vm.currentPage = 1;
-        vm.totalPages = 2;
         vm.currentSearchInfo = {};
+        vm.currentPage = currentPage;
+        vm.totalPages = 0;
 
         function init() {
             var searchInfo = {
@@ -62,7 +64,7 @@
             vm.dealGroups = result;
         }
 
-        function firstPage(searchInfo){
+        function firstPage(){
             if (vm.currentPage > 1) {
                 vm.currentPage = 1;
                 search(vm.currentSearchInfo);
@@ -70,7 +72,7 @@
             }
         }
 
-        function previousPage(searchInfo){
+        function previousPage(){
             if (vm.currentPage > 1) {
                 vm.currentPage -= 1;
                 search(vm.currentSearchInfo);
@@ -78,7 +80,7 @@
             }
         }
 
-        function nextPage(searchInfo){
+        function nextPage(){
             if (vm.currentPage < vm.totalPages) {
                 vm.currentPage += 1;
                 search(vm.currentSearchInfo);
@@ -87,7 +89,7 @@
         }
 
 
-        function lastPage(searchInfo){
+        function lastPage(){
             if (vm.currentPage < vm.totalPages) {
                 vm.currentPage = vm.totalPages;
                 search(vm.currentSearchInfo);

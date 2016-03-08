@@ -52,22 +52,22 @@
         </div>
             <div class="clear"></div>
     </div>
-    <div class="search-pages-buttons">
-        <a ng-class="{'search-invalid-button': model.currentPage == 1}"
-           ng-click="model.firstPage(searchInfo)" class="btn btn-primary" role="button">
+    <div class="form search-pages-buttons">
+        <a ng-click="model.firstPage()" ng-class="{'search-invalid-button': model.currentPage == 1}"
+           class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-backward"></span>
         </a>
-        <a ng-class="{'search-invalid-button': model.currentPage == 1}"
-           ng-click="model.previousPage(searchInfo)" class="btn btn-primary" role="button">
+        <a ng-click="model.previousPage()" ng-class="{'search-invalid-button': model.currentPage == 1}"
+           class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-triangle-left"></span>
         </a>
         <span class="search-pages-bottom-info">{{model.currentPage}}/{{model.totalPages}}</span>
-        <a ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
-           ng-click="model.nextPage(searchInfo)" class="btn btn-primary" role="button">
+        <a ng-click="model.nextPage()" ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+           class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-triangle-right"></span>
         </a>
-        <a ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
-           ng-click="model.lastPage(searchInfo)" class="btn btn-primary" role="button">
+        <a ng-click="model.lastPage()" ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+           class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-forward"></span>
         </a>
     </div>
