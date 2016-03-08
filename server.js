@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
 // Add headers
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://webdevspring2016-rodgersbranden.rhcloud.com');

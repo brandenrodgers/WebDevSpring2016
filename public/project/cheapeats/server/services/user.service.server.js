@@ -18,7 +18,6 @@ module.exports = function(app, dealModel, userModel) {
     function update(req, res) {
         var user = req.body;
         user = userModel.updateUser(user._id, user);
-        console.log("USer updated");
         res.json(user);
     }
 
@@ -29,16 +28,18 @@ module.exports = function(app, dealModel, userModel) {
     }
 
     function loggedIn(req, res) {
+        //TODO update this once I use session
         var user = {field: "test user"};
         res.json(user);
     }
 
     function logout(req, res) {
+        //TODO update this once I use session
         res.send(200);
     }
 
     function profile(req, res) {
-        var userId = parseInt(req.params.userId);
+        var userId = req.params.userId;
         var user = userModel.findUserById(userId);
         var dealIds = user.favorites;
         var deals = dealModel.findDealsByIds(dealIds);

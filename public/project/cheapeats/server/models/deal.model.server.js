@@ -12,9 +12,9 @@ module.exports = function() {
     return api;
 
     function findDealById(dealId) {
+        dealId = parseInt(dealId);
         for(var deal in deals) {
             if(deals[deal].id == dealId) {
-                console.log("successfully found deal by id: " + deals[deal].id);
                 return deals[deal];
             }
         }
@@ -24,7 +24,8 @@ module.exports = function() {
     function findDealsByIds(dealIds) {
         var deals = [];
         for (var id in dealIds) {
-            var deal = findDealById(dealIds[id]);
+            var dealId = parseInt(dealIds[id]);
+            var deal = findDealById(dealId);
             if (deal) {
                 deals.push(deal);
             }
@@ -33,19 +34,20 @@ module.exports = function() {
     }
 
     function createDeal(deal) {
+        deal.favorites= [];
         deals.push(deal);
         console.log("created new deal: " + deal.id);
         return deal;
     }
 
     function updateDeal(dealId, deal) {
+        dealId = parseInt(dealId);
         for(var d in deals) {
             if(deals[d].dealId === dealId) {
                 deals[d] = deal;
                 return;
             }
         }
-        console.log("after update, deal favorites: " + deals[0].favorites);
     }
 
 };

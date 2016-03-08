@@ -5,7 +5,8 @@
     "password": "branden",
     "firstName": "Branden",
     "lastName": "Rodgers",
-    "email": "branden@fakemail.com"
+    "email": "branden@fakemail.com",
+    "favorites": []
   },
   {
     "_id": 22222,
@@ -13,7 +14,8 @@
     "password": "brian",
     "firstName": "brian",
     "lastName": "Cox",
-    "email": "brian@fakemail.com"
+    "email": "brian@fakemail.com",
+    "favorites": []
   },
   {
     "_id": 33333,
@@ -21,7 +23,8 @@
     "password": "ray",
     "firstName": "Ray",
     "lastName": "O'Connor",
-    "email": "ray@fakemail.com"
+    "email": "ray@fakemail.com",
+    "favorites": []
   },
   {
     "_id": 44444,
@@ -29,6 +32,7 @@
     "password": "allison",
     "firstName": "Allison",
     "lastName": "Kulas",
-    "email": "allison@fakemail.com"
+    "email": "allison@fakemail.com",
+    "favorites": []
   }
 ]

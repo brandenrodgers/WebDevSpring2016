@@ -13,12 +13,14 @@ module.exports = function() {
     return api;
 
     function createUser(user) {
-        user._id = "ID_" + (new Date()).getTime();
+        user._id = (new Date()).getTime();
+        user.favorites = [];
         mock.push(user);
         return user;
     }
 
     function updateUser(userId, user) {
+        userId = parseInt(userId);
         for(var u in mock) {
             if( mock[u]._id === userId ) {
                 mock[u] = user;
@@ -28,7 +30,7 @@ module.exports = function() {
     }
 
     function findUserById(userId) {
-        console.log("length of mock;" +  mock.length);
+        userId = parseInt(userId);
         for(var u in mock) {
             if( mock[u]._id === userId ) {
                 return mock[u];
@@ -40,7 +42,8 @@ module.exports = function() {
     function findUsersByIds(userIds) {
         var users = [];
         for (var u in userIds) {
-            var user = findUserById(userIds[u]);
+            var userId = parseInt(userIds[u]);
+            var user = findUserById(userId);
             if (user) {
                 users.push(user);
             }

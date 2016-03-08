@@ -1,21 +1,19 @@
-<div class="main">
+<div class="main no-margin-top">
     <div class="search-wrapper">
-        <form class="form-horizontal">
+        <form class="form-horizontal search-form">
             <div class="form-group">
-                <label for="inputLocation" class="col-sm-2 control-label">Location:</label>
-                <div class="col-sm-10">
-                    <input ng-model="searchInfo.location" type="text" class="form-control" id="inputLocation" placeholder="Location">
+                <div class="col-sm-offset-3 col-xs-offset-1 col-sm-4 col-xs-6">
+                    <label for="inputLocation" class="sr-only">Location:</label>
+                    <input ng-model="searchInfo.location" type="text" class="form-control" id="inputLocation" placeholder="City, State">
+                </div>
+                <div class="col-sm-2 col-xs-4">
+                    <label for="inputRadius" class="sr-only">Radius:</label>
+                    <input ng-model="searchInfo.radius" type="text" class="form-control" id="inputRadius" placeholder="Radius (miles)">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputRadius" class="col-sm-2 control-label">Radius:</label>
-                <div class="col-sm-10">
-                    <input ng-model="searchInfo.radius" type="text" class="form-control" id="inputRadius" placeholder="Radius">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.search(searchInfo)" class="btn btn-primary" type="submit" role="button">Search</a>
+                <div class="col-sm-offset-3 col-xs-offset-1 col-sm-6 col-xs-10">
+                    <a ng-click="model.search(searchInfo)" class="btn btn-block btn-primary" type="submit" role="button">Search</a>
                 </div>
             </div>
         </form>
@@ -23,13 +21,13 @@
     <div class="wrap">
         <div class="section group">
             <div class="cont span_3_of_3">
-                <h2 class="head">Search Results</h2>
+                <h2 id="searchResultsTop" class="head">Search Results <span class="search-pages-top-info">Page: {{model.currentPage}}</span></h2>
                 <div ng-repeat="dealGroup in model.dealGroups" class="top-box">
                     <div ng-repeat="deal in dealGroup" class="col_1_of_3 span_1_of_3">
                         <a href="{{deal.deal.url}}">
                             <div class="inner_content clearfix">
                                 <div class="product_image">
-                                    <img ng-src="{{deal.deal.image_url}}" alt=""/>
+                                    <img class="deal-image" ng-src="{{deal.deal.image_url}}" alt=""/>
                                 </div>
                                 <div class="price">
                                     <div class="cart-left">
@@ -54,7 +52,23 @@
         </div>
             <div class="clear"></div>
     </div>
-    <hr class="fancy-style"/>
-    <a ng-click="model.previousPage(searchInfo)" class="btn btn-primary" role="button">Previous Page</a>
-    <a ng-click="model.nextPage(searchInfo)" class="btn btn-primary" role="button">Next Page</a>
+    <div class="search-pages-buttons">
+        <a ng-class="{'search-invalid-button': model.currentPage == 1}"
+           ng-click="model.firstPage(searchInfo)" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-backward"></span>
+        </a>
+        <a ng-class="{'search-invalid-button': model.currentPage == 1}"
+           ng-click="model.previousPage(searchInfo)" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-triangle-left"></span>
+        </a>
+        <span class="search-pages-bottom-info">{{model.currentPage}}/{{model.totalPages}}</span>
+        <a ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+           ng-click="model.nextPage(searchInfo)" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-triangle-right"></span>
+        </a>
+        <a ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+           ng-click="model.lastPage(searchInfo)" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-forward"></span>
+        </a>
+    </div>
 </div>

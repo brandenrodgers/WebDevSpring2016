@@ -9,12 +9,13 @@
                 <h3 class="m_3">{{model.data.title}}</h3>
                 <p class="m_5">${{model.data.price}}
                     <span class="reducedfrom">${{model.data.price + model.data.discount_amount}}</span>
-                    <a href="{{model.data.url}}">Click to Redeem</a>
+                    <a href="{{model.data.url}}" class="details-buy-button btn btn-primary" type="submit" role="button">Buy</a>
                 </p>
                 <div class="btn_form">
                     <form>
-                        <input ng-click="model.favoriteDeal(model.data)" type="submit" value="Favorite">
-                        <span class="glyphicon glyphicon-heart"></span>
+                        <i ng-class="model.favorited ? 'fav-icon-clicked' : 'fav-icon-unclicked'" ng-click="model.favoriteDeal(model.data)" class="glyphicon glyphicon-heart"></i>
+                        <span ng-hide="model.favorited">Favorite</span>
+                        <span ng-show="model.favorited">Unfavorite</span>
                     </form>
                 </div>
                 <p class="m_4">Expires: {{model.data.expires_at}}</p>
@@ -23,13 +24,15 @@
             <div class="clear"></div>
             <div class="toogle">
                 <h3 class="m_3">Deal Details</h3>
-                <p class="m_text">{{model.data.description}}</p>
+                <div class="m_text" ng-bind-html="model.data.description">{{model.data.description}}</div>
             </div>
             <div ng-if="model.dealFavoritesByUsers" class="toogle">
                 <h3 class="m_3">Other Users who Favorited this Deal</h3>
                 <ul>
                     <li ng-repeat="user in model.dealFavoritesByUsers">
-                    {{user.username}}
+                        <div ng-if="user.username !== currentUser.username">
+                            {{user.username}}
+                        </div>
                     </li>
                 </ul>
             </div>

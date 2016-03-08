@@ -75,11 +75,17 @@ body{
 .header-bottom{
 	background:#fff;
 	padding:2% 0;
+	border-bottom: 2px solid black;
 }
 .logo{
 	float:left;
 	margin-right: 6.6%;
 }
+
+.deal-image {
+	margin: auto;
+}
+
 /*--menu--*/
 /* dCodes Framework:(c) TemplateAccess */
 .menu{
@@ -354,6 +360,11 @@ ul.last li a:hover{
 .main{
 	margin:2% 0;
 }
+
+.no-margin-top{
+	margin-top: 0;
+}
+
 .cont{
 	display: block;
 	float:left;
@@ -418,10 +429,12 @@ h2.head{
 .inner_content {
 	padding:10px;
 	position: relative;
+	min-height: 315px;
 }
 .product_image {
 	
 }
+
 .product_image img{
 	display:block;
 	border:1px solid #f0f0f0;
@@ -2214,6 +2227,7 @@ ul.delivery-list li a:hover{
 		top: 88px;
 	}
 }
+
 @media (max-width:1280px){
 	.wrap{
 		width:90%;
@@ -3182,25 +3196,49 @@ ul.delivery-list li a:hover{
 }
 
 .search-wrapper {
-	padding: 30px 40px 5px 0;
+	padding-top: 10px;
 	background: #4cb1ca;
+	border: 2px solid black;
+	border-top: 0;
 }
 
-hr.fancy-style {
-	height: 30px;
-	margin: 0 10px 5px 10px;
-	border-style: solid;
-	border-color: black;
-	border-width: 1px 0 0 0;
-	border-radius: 20px;
+.search-pages-buttons{
+	border-top: 2px solid black;
+	padding-top: 5px;
+	width: 100%;
+	text-align: center;
 }
-hr.fancy-style:before { /* Not really supposed to work, but does */
-	display: block;
-	content: "";
-	height: 30px;
-	margin-top: -31px;
-	border-style: solid;
-	border-color: black;
-	border-width: 0 0 1px 0;
-	border-radius: 20px;
+
+.search-pages-bottom-info{
+	margin: 0 3px 0 3px;
+}
+
+.search-pages-top-info{
+	font-size: 15px;
+	color: black;
+}
+
+.search-invalid-button{
+	background-color: #a3c2c2;
+	border-color: #a3c2c2;
+}
+
+.fav-icon-unclicked{
+	font-size: 1.9em;
+	margin-right: 5px;
+}
+
+.fav-icon-clicked{
+	color: red;
+	font-size: 1.9em;
+	margin-right: 5px;
+}
+
+.fav-icon-clicked:hover, .fav-icon-unclicked:hover{
+	cursor: pointer;
+}
+
+a[type="submit"].details-buy-button{
+	color: white;
+	width: 60px;
 }
