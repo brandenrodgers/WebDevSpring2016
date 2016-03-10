@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="app2.js"></script>
+</head>
+
+<div id="d">
+    <a href="/">Home</a>
+    <h1>Simple Canvas Drawing Directive in AngularJS</h1>
+    <canvas width="500" height="300" id="canvas" drawing></canvas>
+</div>
+<input ng-controller="DrawingController" type="submit" ng-click="reset()" value="Reset">
+</body>
+
+</html>
