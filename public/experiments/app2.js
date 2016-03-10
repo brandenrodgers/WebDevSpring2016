@@ -34,6 +34,7 @@
                 element.bind('mouseup', drawEnd.bind(event));
 
                 function drawStart(event){
+                    event.preventDefault();
                     if(event.offsetX!==undefined){
                         lastX = event.offsetX;
                         lastY = event.offsetY;
