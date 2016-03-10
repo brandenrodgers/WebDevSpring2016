@@ -45,8 +45,8 @@
                         }
                     }
                     else {
-                        lastX = event.offsetX;
-                        lastY = event.offsetY - 120;
+                        lastX = event.touches[0].pageX;
+                        lastY = event.touches[0].pageY;
                     }
 
                     // begins new line
