@@ -58,12 +58,18 @@
                 function drawMove(event){
                     if(drawing){
                         // get current mouse position
-                        if(event.offsetX!==undefined){
-                            currentX = event.offsetX;
-                            currentY = event.offsetY;
-                        } else {
-                            currentX = event.layerX - event.currentTarget.offsetLeft;
-                            currentY = event.layerY - event.currentTarget.offsetTop;
+                        if (event.type == "mousemove") {
+                            if (event.offsetX !== undefined) {
+                                currentX = event.offsetX;
+                                currentY = event.offsetY;
+                            } else {
+                                currentX = event.layerX - event.currentTarget.offsetLeft;
+                                currentY = event.layerY - event.currentTarget.offsetTop;
+                            }
+                        }
+                        else {
+                            currentX = event.touches[0].pageX;
+                            currentY = event.touches[0].pageY;
                         }
 
                         draw(lastX, lastY, currentX, currentY);
