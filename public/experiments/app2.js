@@ -26,7 +26,14 @@
                 var lastX;
                 var lastY;
 
-                element.bind('mousedown', function(event){
+                element.bind('touchstart', drawStart.bind(event));
+                element.bind('mousedown', drawStart.bind(event));
+                element.bind('touchmove', drawMove.bind(event));
+                element.bind('mousemove', drawMove.bind(event));
+                element.bind('touchend', drawEnd.bind(event));
+                element.bind('mouseup', drawEnd.bind(event));
+
+                function drawStart(event){
                     if(event.offsetX!==undefined){
                         lastX = event.offsetX;
                         lastY = event.offsetY;
@@ -39,8 +46,9 @@
                     ctx.beginPath();
 
                     drawing = true;
-                });
-                element.bind('mousemove', function(event){
+                }
+
+                function drawMove(event){
                     if(drawing){
                         // get current mouse position
                         if(event.offsetX!==undefined){
@@ -58,11 +66,12 @@
                         lastY = currentY;
                     }
 
-                });
-                element.bind('mouseup', function(event){
+                }
+
+                function drawEnd(event){
                     // stop drawing
                     drawing = false;
-                });
+                }
 
                 function draw(lX, lY, cX, cY){
                     // line from
