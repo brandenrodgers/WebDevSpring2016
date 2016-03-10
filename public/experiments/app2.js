@@ -45,8 +45,8 @@
                         }
                     }
                     else {
-                        lastX = event.targetTouches[0].pageX;
-                        lastY = event.targetTouches[0].pageY;
+                        lastX = event.targetTouches[0].pageX - element[0].offsetLeft;
+                        lastY = event.targetTouches[0].pageY - element[0].offsetTop;
                     }
 
                     // begins new line
@@ -68,8 +68,8 @@
                             }
                         }
                         else {
-                            currentX = event.targetTouches[0].pageX;
-                            currentY = event.targetTouches[0].pageY;
+                            currentX = event.targetTouches[0].pageX - element[0].offsetLeft;
+                            currentY = event.targetTouches[0].pageY - element[0].offsetTop;
                         }
 
                         draw(lastX, lastY, currentX, currentY);
