@@ -10,10 +10,18 @@
 
 <div id="d">
     <a href="/">Home</a>
-    <h1>Simple Canvas Drawing Directive in AngularJS</h1>
-    <canvas width="500" height="300" id="canvas" drawing></canvas>
+    <h1>Draw and Save</h1>
+    <canvas width="500" height="500" id="canvas" drawing></canvas>
 </div>
-<input ng-controller="DrawingController" type="submit" ng-click="reset()" value="Reset">
+<div ng-controller="DrawingController">
+    <div class="button-wrapper">
+        <input type="submit" ng-click="reset()" value="Reset">
+        <input type="submit" ng-click="save()" value="Save">
+    </div>
+    <div ng-repeat="image in images">
+        <img ng-src="{{image}}"/>
+    </div>
+</div>
 </body>
 
 </html>

@@ -2,12 +2,21 @@
     angular
     .module("app", [])
     .controller("DrawingController", function($scope){
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+
         $scope.reset = reset;
+        $scope.save = save;
+        $scope.images = [];
+
 
         function reset(){
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
             context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function save() {
+            var image = canvas.toDataURL("image/png");
+            $scope.images.unshift(image);
         }
     })
     .directive("drawing", drawing);
@@ -92,7 +101,7 @@
                     // to
                     ctx.lineTo(cX,cY);
                     // color
-                    ctx.strokeStyle = "#4bf";
+                    ctx.strokeStyle = "black";
                     // draw it
                     ctx.stroke();
                 }
