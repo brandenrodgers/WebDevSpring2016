@@ -35,12 +35,18 @@
 
                 function drawStart(event){
                     event.preventDefault();
-                    if(event.offsetX!==undefined){
+                    if (event.type == "mousedown") {
+                        if (event.offsetX !== undefined) {
+                            lastX = event.offsetX;
+                            lastY = event.offsetY;
+                        } else { // Firefox compatibility
+                            lastX = event.layerX - event.currentTarget.offsetLeft;
+                            lastY = event.layerY - event.currentTarget.offsetTop;
+                        }
+                    }
+                    else {
                         lastX = event.offsetX;
-                        lastY = event.offsetY;
-                    } else { // Firefox compatibility
-                        lastX = event.layerX - event.currentTarget.offsetLeft;
-                        lastY = event.layerY - event.currentTarget.offsetTop;
+                        lastY = event.offsetY - 120;
                     }
 
                     // begins new line
