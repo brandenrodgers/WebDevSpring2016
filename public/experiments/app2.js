@@ -45,8 +45,8 @@
                         }
                     }
                     else {
-                        lastX = event.touches[0].pageX;
-                        lastY = event.touches[0].pageY;
+                        lastX = event.targetTouches[0].pageX;
+                        lastY = event.targetTouches[0].pageY;
                     }
 
                     // begins new line
@@ -68,8 +68,8 @@
                             }
                         }
                         else {
-                            currentX = event.touches[0].pageX;
-                            currentY = event.touches[0].pageY;
+                            currentX = event.targetTouches[0].pageX;
+                            currentY = event.targetTouches[0].pageY;
                         }
 
                         draw(lastX, lastY, currentX, currentY);
