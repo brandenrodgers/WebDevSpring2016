@@ -1,7 +1,7 @@
 (function(){
     angular
-    .module("app", [])
-    .controller("DrawingController", function($scope){
+    .module("DrawingApp", [])
+    .controller("DrawingController", function($scope, drawingService){
         var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
 
@@ -17,6 +17,16 @@
         function save() {
             var image = canvas.toDataURL("image/png");
             $scope.images.unshift(image);
+            drawingService.save(image);
+            updateImages();
+        }
+
+        function updateImages(){
+            drawingService
+                .getAll()
+                .then(function(response){
+                    $scope.images = response.data.drawings;
+                });
         }
     })
     .directive("drawing", drawing);

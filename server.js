@@ -40,6 +40,7 @@ app.get('/', function(req, res){
 });
 
 require('./public/project/cheapeats/server/app.js')(app);
+require('./public/experiments/telestrations/server/app.js')(app);
 
 app.listen(port, ipaddress, function(){
     console.log('listening on: ' + ipaddress + ':' + port);
