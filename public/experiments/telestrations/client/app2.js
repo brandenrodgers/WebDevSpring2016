@@ -7,6 +7,7 @@
 
         $scope.reset = reset;
         $scope.save = save;
+        $scope.refresh = refresh;
         $scope.images = [];
 
 
@@ -17,12 +18,10 @@
         function save() {
             var imageUrl = canvas.toDataURL("image/png");
             drawingService.save(imageUrl);
-            updateImages();
         }
 
-        function updateImages(){
-            drawingService
-                .getAll()
+        function refresh(){
+            drawingService.getAll()
                 .then(function(response){
                     $scope.images = response.data.drawings;
                 });
