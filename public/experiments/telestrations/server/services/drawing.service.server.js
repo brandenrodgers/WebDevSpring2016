@@ -6,9 +6,8 @@ module.exports = function(app, drawingModel) {
     app.get("/api/drawing/all", getAll);
 
     function save(req, res) {
-        var drawing  = req.body;
-        console.log(req.body);
-        drawingModel.saveDrawing(drawing.url);
+        var image  = req.body;
+        drawingModel.saveDrawing(image);
         res.send(200);
     }
 

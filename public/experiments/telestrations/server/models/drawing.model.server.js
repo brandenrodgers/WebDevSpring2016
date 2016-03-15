@@ -10,8 +10,9 @@ module.exports = function() {
     };
     return api;
 
-    function saveDrawing(url) {
-        drawings.push(url);
+    function saveDrawing(image) {
+        image._id = (new Date()).getTime();
+        drawings.push(image);
     }
 
     function getAllDrawings() {

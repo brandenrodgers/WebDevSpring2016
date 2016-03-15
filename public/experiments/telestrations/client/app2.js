@@ -15,9 +15,8 @@
         }
 
         function save() {
-            var image = canvas.toDataURL("image/png");
-            $scope.images.unshift(image);
-            drawingService.save(image);
+            var imageUrl = canvas.toDataURL("image/png");
+            drawingService.save(imageUrl);
             updateImages();
         }
 
