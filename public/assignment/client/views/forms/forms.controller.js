@@ -6,37 +6,49 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($scope, $rootScope, FormService){
+    function FormController($scope, $rootScope, formService){
 
         $scope.form = null;
-
-        FormService.findAllFormsForUser($rootScope.currentUser._id, function(result){
-            $scope.availableForms = result;
-        });
 
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
 
+        function init() {
+            formService
+                .findAllForms($rootScope.currentUser._id)
+                .then(function (response) {
+                    $scope.availableForms = response.data;
+                });
+        }
+        init();
+
         function addForm(){
-            FormService.createFormForUser($rootScope.currentUser._id, $scope.form, function(result){
-                $scope.availableForms.push(result);
-                $scope.form = null;
-            });
+            formService
+                .createForm($rootScope.currentUser._id, $scope.form)
+                .then(function(response){
+                    $scope.availableForms.push(response.data);
+                    $scope.form = null;
+                });
         }
 
         function updateForm(){
-            FormService.updateFormById($scope.availableForms[$scope.selectedFormIndex]._id, $scope.form, function(result){
-                $scope.form = null;
-            });
+            formService
+                .updateForm($scope.availableForms[$scope.selectedFormIndex]._id, $scope.form)
+                .then(function(response){
+                    $scope.availableForms[$scope.selectedFormIndex] = response.data;
+                    $scope.form = null;
+                });
         }
 
         function deleteForm(index){
-            FormService.deleteFormById($scope.availableForms[index]._id, function(result){
-                $scope.availableForms.splice(index, 1);
-                $scope.form = null;
-            });
+            formService
+                .deleteForm($scope.availableForms[index]._id)
+                .then(function(response){
+                    $scope.availableForms.splice(index, 1);
+                    $scope.form = null;
+                });
 
         }
 

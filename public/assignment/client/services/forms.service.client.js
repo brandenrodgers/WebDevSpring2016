@@ -4,64 +4,48 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .factory("FormService", FormService);
+        .factory("formService", FormService);
 
-    function FormService(){
-        var forms = [];
-
-        forms = [
-            {"_id": "000", "title": "Contacts", "userId": 123},
-            {"_id": "010", "title": "ToDo",     "userId": 123},
-            {"_id": "020", "title": "CDs",      "userId": 234}
-        ];
+    function FormService($http){
 
         var service = {
-            createFormForUser: createFormForUser,
-            findAllFormsForUser: findAllFormsForUser,
-            deleteFormById: deleteFormById,
-            updateFormById: updateFormById
+            createForm: createForm,
+            findAllForms: findAllForms,
+            findFormById: findFormById,
+            findFormByTitle: findFormByTitle,
+            updateForm: updateForm,
+            deleteForm: deleteForm
         };
 
         return service;
 
-        function createFormForUser(userId, form, callback){
+        function createForm(userId, form){
             form._id = (new Date).getTime();
             form.userId = userId;
-            forms.push(form);
-            console.log("created new form: " + form.title);
-            callback(form);
+            return $http.post("/api/assignments/form", form);
         }
 
-        function findAllFormsForUser(userId, callback){
-            var result = [];
-            for (var i=0; i < forms.length; i++){
-                if (forms[i].userId == userId){
-                    result.push(forms[i]);
-                }
-            }
-            callback(result);
+        function findFormById(formId){
+            return $http.get("/api/assignments/form/" + formId);
         }
 
-        function deleteFormById(formId, callback){
-            for (var i=0; i < forms.length; i++){
-                if (forms[i]._id == formId){
-                    forms.splice(i, 1);
-                    break;
-                }
-            }
-            callback(forms);
+        function findFormByTitle(title){
+            var data = {
+                title: title
+            };
+            return $http.post("/api/assignments/title", data);
         }
 
-        function updateFormById(formId, newForm, callback) {
-            var resultForm = {};
-            for (var i = 0; i < forms.length; i++) {
-                if (forms[i]._id == formId){
-                    forms[i].title = newForm.title; // TODO maybe update more fields
-                    resultForm = forms[i];
-                    break;
-                }
-            }
-            callback(resultForm);
+        function findAllForms(userId){
+            return $http.get("/api/assignments/forms/" + userId);
+        }
+
+        function deleteForm(formId){
+            return $http.delete("/api/assignments/form/" + formId);
+        }
+
+        function updateForm(formId, form) {
+            return $http.put("/api/assignments/form/" + formId, form);
         }
 
     }
