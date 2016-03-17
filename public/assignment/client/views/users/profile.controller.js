@@ -15,9 +15,12 @@
 
         var preservedUserInfo = preserveInfo($scope.currentUser);
 
-        if(!$scope.currentUser) {
-            $location.url("/home");
+        function init() {
+            if (!$scope.currentUser) {
+                $location.url("/home");
+            }
         }
+        init();
 
         $scope.update = update;
 
@@ -36,11 +39,13 @@
                 return;
             }
 
-            UserService.updateUser($scope.currentUser._id, $scope.currentUser, function(newUser){
-                UserService.setCurrentUser(newUser);
-                preservedUserInfo = preserveInfo(newUser);
-                $scope.message = "Profile Successfully Updated";
-            });
+            UserService
+                .updateUser($scope.currentUser._id, $scope.currentUser)
+                .then(function(response){
+                    UserService.setCurrentUser(response.data);
+                    preservedUserInfo = preserveInfo(response.data);
+                    $scope.message = "Profile Successfully Updated";
+                });
         }
 
         function preserveInfo(user){

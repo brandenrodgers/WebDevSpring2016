@@ -39,6 +39,7 @@ app.get('/', function(req, res){
     res.sendfile((__dirname + '/index.html'));
 });
 
+require('./public/assignment/server/app.js')(app);
 require('./public/project/cheapeats/server/app.js')(app);
 require('./public/experiments/telestrations/server/app.js')(app);
 
