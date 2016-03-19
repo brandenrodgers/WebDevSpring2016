@@ -13,7 +13,8 @@
             getFieldForForm: getFieldForForm,
             deleteFieldFromForm: deleteFieldFromForm,
             createFieldForForm: createFieldForForm,
-            updateField: updateField
+            updateField: updateField,
+            moveField: moveField
         };
 
         return service;
@@ -36,6 +37,10 @@
 
         function updateField(formId, fieldId, field){
             return $http.put("/api/assignments/form/" + formId + "/field/" + fieldId, field);
+        }
+
+        function moveField(formId, fieldId, direction){
+            return $http.post("/api/assignments/form/" + formId + "/field/" + fieldId + "/move", direction);
         }
     }
 

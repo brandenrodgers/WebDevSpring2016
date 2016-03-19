@@ -14,7 +14,8 @@ module.exports = function() {
         findFormFieldById: findFormFieldById,
         deleteFormField: deleteFormField,
         createFormField: createFormField,
-        updateFormField: updateFormField
+        updateFormField: updateFormField,
+        moveFormField: moveFormField
     };
     return api;
 
@@ -137,6 +138,35 @@ module.exports = function() {
                             }
                         }
                         return forms[x].fields[y];
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    function moveFormField(formId, fieldId, direction){
+        for(var x in forms){
+            if(forms[x]._id == formId){
+                for(var y in forms[x].fields){
+                    if(forms[x].fields[y]._id == fieldId){
+                        if (direction.direction == "UP"){
+                            var newIndex = parseInt(y) - 1;
+                            console.log("UP");
+                        }
+                        else {
+                            var newIndex = parseInt(y) + 1;
+                            console.log("DOWN");
+                        }
+                        console.log(forms[x].fields);
+                        console.log(y);
+                        console.log(newIndex);
+                        if (newIndex >= forms[x].fields.length || newIndex < 0) {
+                            return null;
+                        }
+                        forms[x].fields.splice(newIndex, 0, forms[x].fields.splice(y, 1)[0]);
+                        return forms[x].fields;
+
                     }
                 }
             }

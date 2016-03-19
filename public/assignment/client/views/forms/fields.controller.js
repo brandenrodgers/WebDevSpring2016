@@ -23,6 +23,8 @@
         vm.updateFieldType = updateFieldType;
         vm.closePopup = closePopup;
         vm.applyChanges = applyChanges;
+        vm.moveFieldUp = moveFieldUp;
+        vm.moveFieldDown = moveFieldDown;
 
         function init(){
             formService
@@ -137,6 +139,32 @@
             vm.fieldEditor = false;
             vm.selectedField = null;
             vm.popupTitle = null;
+        }
+
+        function moveFieldUp(fieldId){
+            fieldService
+                .moveField(vm.formId, fieldId, {direction: "UP"})
+                .then(function(response){
+                    if (response.data){
+                        vm.form.fields = response.data;
+                    }
+                    else {
+                        console.log("Uh oh, Bad Response");
+                    }
+                });
+        }
+
+        function moveFieldDown(fieldId){
+            fieldService
+                .moveField(vm.formId, fieldId, {direction: "DOWN"})
+                .then(function(response){
+                    if (response.data){
+                        vm.form.fields = response.data;
+                    }
+                    else {
+                        console.log("Uh oh, Bad Response");
+                    }
+                });
         }
     }
 
