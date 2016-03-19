@@ -19,7 +19,7 @@
         return service;
 
         function getFieldsForForm(formId){
-           return $http.get("/api/assignments/form/" + formId + "/field");
+           return $http.get("/api/assignments/form/" + formId + "/field/");
         }
 
         function getFieldForForm(formId, fieldId){

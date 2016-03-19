@@ -6,45 +6,45 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $location, UserService){
+    function ProfileController($location, UserService){
+        var vm = this;
+        vm.message = null;
+        vm.errorMessage = null;
 
-        $scope.message = null;
-        $scope.errorMessage = null;
+        vm.currentUser = UserService.getCurrentUser();
 
-        $scope.currentUser = UserService.getCurrentUser();
-
-        var preservedUserInfo = preserveInfo($scope.currentUser);
+        var preservedUserInfo = preserveInfo(vm.currentUser);
 
         function init() {
-            if (!$scope.currentUser) {
+            if (!vm.currentUser) {
                 $location.url("/home");
             }
         }
         init();
 
-        $scope.update = update;
+        vm.update = update;
 
         function update(){
-            $scope.message = null;
-            $scope.errorMessage = null;
+            vm.message = null;
+            vm.errorMessage = null;
 
-            if (!$scope.currentUser.username){
-                $scope.errorMessage = "Username cannot be empty";
-                $scope.currentUser.username = preservedUserInfo.username;
+            if (!vm.currentUser.username){
+                vm.errorMessage = "Username cannot be empty";
+                vm.currentUser.username = preservedUserInfo.username;
                 return;
             }
-            if (!$scope.currentUser.password){
-                $scope.errorMessage = "Password cannot be empty";
-                $scope.currentUser.password = preservedUserInfo.password;
+            if (!vm.currentUser.password){
+                vm.errorMessage = "Password cannot be empty";
+                vm.currentUser.password = preservedUserInfo.password;
                 return;
             }
 
             UserService
-                .updateUser($scope.currentUser._id, $scope.currentUser)
+                .updateUser(vm.currentUser._id, vm.currentUser)
                 .then(function(response){
                     UserService.setCurrentUser(response.data);
                     preservedUserInfo = preserveInfo(response.data);
-                    $scope.message = "Profile Successfully Updated";
+                    vm.message = "Profile Successfully Updated";
                 });
         }
 

@@ -113,6 +113,7 @@ module.exports = function() {
         for(var x in forms){
             if(forms[x]._id == formId){
                 field._id = (new Date()).getTime();
+                field = buildNewField(field);
                 forms[x].fields.push(field);
                 return field;
             }
@@ -127,11 +128,13 @@ module.exports = function() {
                     if(forms[x].fields[y]._id == fieldId){
                         forms[x].fields[y].label = field.label || forms[x].fields[y].label;
                         forms[x].fields[y].type = field.type || forms[x].fields[y].type;
-                        if (forms[x].fields[y].type == "TEXT" || forms[x].fields[y].type == "TEXTAREA"){
-                            forms[x].fields[y].placeholder = field.placeholder || forms[x].fields[y].placeholder;
-                        }
-                        if (forms[x].fields[y].type == "OPTIONS"){
-                            forms[x].fields[y].options = field.options || forms[x].fields[y].options;
+                        if (forms[x].fields[y].type != "DATE") {
+                            if (forms[x].fields[y].type == "TEXT" || forms[x].fields[y].type == "TEXTAREA") {
+                                forms[x].fields[y].placeholder = field.placeholder || forms[x].fields[y].placeholder;
+                            }
+                            else {
+                                forms[x].fields[y].options = field.options || forms[x].fields[y].options;
+                            }
                         }
                         return forms[x].fields[y];
                     }
@@ -139,6 +142,56 @@ module.exports = function() {
             }
         }
         return null;
+    }
+
+    function buildNewField(field){
+        if (field.type == "Single Line Text Field") {
+            field.type = "TEXT";
+            field.label = "New Text Field";
+            field.placeholder = "New Field";
+            return field;
+        }
+        else if (field.type == "Multi Line Text Field") {
+            field.type = "TEXTAREA";
+            field.label = "New Text Field";
+            field.placeholder = "New Field";
+            return field;
+        }
+        else if (field.type == "Date Field"){
+            field.type = "DATE";
+            field.label = "New Date Field";
+            return field;
+        }
+        else if (field.type == "Dropdown Field"){
+            field.type = "OPTIONS";
+            field.label = "New Dropdown";
+            field.options = [
+                {"label": "Option 1", "value": "OPTION_1"},
+                {"label": "Option 2", "value": "OPTION_2"},
+                {"label": "Option 3", "value": "OPTION_3"}
+            ];
+            return field;
+        }
+        else if (field.type == "Checkboxes Field"){
+            field.type = "CHECKBOXES";
+            field.label = "New Checkboxes";
+            field.options = [
+                {"label": "Option A", "value": "OPTION_A"},
+                {"label": "Option B", "value": "OPTION_B"},
+                {"label": "Option C", "value": "OPTION_C"}
+            ];
+            return field;
+        }
+        else if (field.type == "Radio Buttons Field"){
+            field.type = "RADIOS";
+            field.label = "New Radio Buttons";
+            field.options = [
+                {"label": "Option X", "value": "OPTION_X"},
+                {"label": "Option Y", "value": "OPTION_Y"},
+                {"label": "Option Z", "value": "OPTION_Z"}
+            ];
+            return field;
+        }
     }
 
 };

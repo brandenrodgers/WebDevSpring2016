@@ -1,11 +1,11 @@
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h1 class="page-header">Forms: Registration Form</h1>
+    <h1 class="page-header">Forms: {{model.form.title}}</h1>
 
     <div>
         <ul class="nav nav-tabs">
-            <li role="presentation"><a href="forms.view.html">Forms</a></li>
-            <li role="presentation" class="active"><a href="fields.view.html">Fields</a></li>
+            <li role="presentation"><a href="#/forms">Forms</a></li>
+            <li role="presentation" class="active"><a href="#/fields">Fields</a></li>
         </ul>
     </div>
     <div>
@@ -112,22 +112,121 @@
                 <div class="col-sm-8 form-group">
                     <label>Add New Field:</label>
                     <div class="dropdown">
-                        <button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown">Single Line Text
+                        <button class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown">{{model.fieldType}}
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Single Line Text</a></li>
-                            <li><a href="#">Date</a></li>
-                            <li><a href="#">Dropdown</a></li>
-                            <li><a href="#">Checkboxes</a></li>
-                            <li><a href="#">Radio Buttons</a></li>
-                            <li><a href="#">Paragraph Text Field</a></li>
+                            <li><a ng-click="model.updateFieldType('Single Line TextField')">Single Line Text Field</a></li>
+                            <li><a ng-click="model.updateFieldType('Multi Line Text Field')">Multi Line Text Field</a></li>
+                            <li><a ng-click="model.updateFieldType('Date Field')">Date Field</a></li>
+                            <li><a ng-click="model.updateFieldType('Dropdown Field')">Dropdown Field</a></li>
+                            <li><a ng-click="model.updateFieldType('Checkboxes Field')">Checkboxes Field</a></li>
+                            <li><a ng-click="model.updateFieldType('Radio Buttons Field')">Radio Buttons Field</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-4 icons-right">
-                    <span class="glyphicon glyph-btn glyphicon-plus glyphicon-lg"></span>
+                    <span ng-click="model.addField(model.fieldType)" class="glyphicon glyph-btn glyphicon-plus glyphicon-lg"></span>
                 </div>
             </div>
         </form>
+        <hr>
+        <div class="row">
+            <div ng-show="model.fieldEditor" class="col-xs-offset-2 col-xs-8 field-popup">
+                <div class="field-popup-header">
+                    <div class="popup-exit">
+                        <span ng-click="model.closePopup()" class="glyphicon glyph-btn glyphicon-remove-sign"></span>
+                    </div>
+                    <span>{{model.popupTitle}}</span>
+                </div>
+                <form>
+                    <div class="row vertical-align">
+                        <div class="col-xs-offset-1 col-xs-10 form-group">
+                            <div class="field-popup-content">
+                                <label for="label">Label:</label>
+                                <input ng-model="model.selectedField.label" type="text" class="form-control" id="label" placeholder="{{model.selectedField.label}}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row vertical-align">
+                        <div ng-show="model.selectedField.type == 'TEXT' || model.selectedField.type == 'TEXTAREA'"
+                             class="col-xs-offset-1 col-xs-10 form-group">
+                            <div class="field-popup-content">
+                                <label for="placeholder">Placeholder:</label>
+                                <input ng-model="model.selectedField.placeholder" type="text" class="form-control" id="placeholder" placeholder="{{model.selectedField.placeholder}}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="['OPTIONS', 'CHECKBOXES', 'RADIOS'].indexOf(model.selectedField.type) > -1" class="row vertical-align">
+                        <div class="col-xs-offset-1 col-xs-10 form-group">
+                            <div class="field-popup-content">
+                                <label for="options">Options:</label>
+                                <textarea ng-model="model.selectedField.optionsPretty" class="form-control" rows="5" id="options"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="popup-buttons col-xs-offset-1 col-xs-10">
+                            <a ng-click="model.applyChanges(model.selectedField)" class="btn btn-primary" role="button">Ok</a>
+                            <a ng-click="model.closePopup()" class="btn btn-primary" role="button">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h2>Current Fields</h2>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Move</th>
+                <th>Field Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="field in model.form.fields">
+                <td>
+                    <span ng-click="model.moveFieldUp(field._id)" class="glyphicon glyph-btn glyphicon-menu-up glyphicon-lg"></span>
+                    <span ng-click="model.moveFieldDown(field._id)" class="glyphicon glyph-btn glyphicon-menu-down glyphicon-lg"></span>
+                </td>
+                <td>{{field.label}}</td>
+                <td class="icons-right">
+                    <span ng-click="model.removeField(field._id)" class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
+                    <span ng-click="model.editField(field._id)" class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--
+        <div>
+            <select ng-model="model.selection" ng-options="type for type in model.typeArray"></select>
+            <hr/>
+            <div class="animate-switch-container" ng-switch on="model.selection">
+                <div class="animate-switch" ng-switch-when="All">
+                    <ul id="sortable1" ng-repeat="field in model.form.fields">
+                        <li>
+                            <span>{{field.label}}</span>
+                            <span ng-click="model.removeField(field._id)" class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
+                            <span ng-click="model.editField(field._id)" class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="animate-switch" ng-switch-when="Single Line Text">
+                    <ul ng-repeat="field in model.form.fields | filter: {type: 'TEXT'}">
+                        <li>
+                            <span>{{field.label}}</span>
+                            <span ng-click="model.removeField(field._id)" class="glyphicon glyph-btn glyphicon-remove glyphicon-lg"></span>
+                            <span ng-click="model.editField(field._id)" class="glyphicon glyph-btn glyphicon-pencil glyphicon-lg"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="animate-switch" ng-switch-when="Multi Line Text">Multi</div>
+                <div class="animate-switch" ng-switch-when="Date">Date</div>
+                <div class="animate-switch" ng-switch-when="Dropdown">Dropdown</div>
+                <div class="animate-switch" ng-switch-when="Checkboxes">Checkboxes</div>
+                <div class="animate-switch" ng-switch-when="Radio Buttons">Radio</div>
+                <div class="animate-switch" ng-switch-default>default</div>
+            </div>
+        </div>
+        -->
     </div>
 </div>

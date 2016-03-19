@@ -7,6 +7,7 @@
         .controller("SidebarController", SidebarController);
 
     function SidebarController(){
+        var vm = this;
         //stuff here
     }
 

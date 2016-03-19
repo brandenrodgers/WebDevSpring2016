@@ -7,57 +7,57 @@
         .controller("FormController", FormController);
 
     function FormController($scope, $rootScope, formService){
+        var vm = this;
+        vm.form = null;
 
-        $scope.form = null;
-
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
 
         function init() {
             formService
                 .findAllForms($rootScope.currentUser._id)
                 .then(function (response) {
-                    $scope.availableForms = response.data;
+                    vm.availableForms = response.data;
                 });
         }
         init();
 
         function addForm(){
             formService
-                .createForm($rootScope.currentUser._id, $scope.form)
+                .createForm($rootScope.currentUser._id, vm.form)
                 .then(function(response){
-                    $scope.availableForms.push(response.data);
-                    $scope.form = null;
+                    vm.availableForms.push(response.data);
+                    vm.form = null;
                 });
         }
 
         function updateForm(){
             formService
-                .updateForm($scope.availableForms[$scope.selectedFormIndex]._id, $scope.form)
+                .updateForm(vm.availableForms[vm.selectedFormIndex]._id, vm.form)
                 .then(function(response){
-                    $scope.availableForms[$scope.selectedFormIndex] = response.data;
-                    $scope.form = null;
+                    vm.availableForms[vm.selectedFormIndex] = response.data;
+                    vm.form = null;
                 });
         }
 
         function deleteForm(index){
             formService
-                .deleteForm($scope.availableForms[index]._id)
+                .deleteForm(vm.availableForms[index]._id)
                 .then(function(response){
-                    $scope.availableForms.splice(index, 1);
-                    $scope.form = null;
+                    vm.availableForms.splice(index, 1);
+                    vm.form = null;
                 });
 
         }
 
         function selectForm(index){
-            $scope.selectedFormIndex = index;
-            $scope.form = {
-                _id: $scope.availableForms[index]._id,
-                title: $scope.availableForms[index].title,
-                userId: $scope.availableForms[index].userId
+            vm.selectedFormIndex = index;
+            vm.form = {
+                _id: vm.availableForms[index]._id,
+                title: vm.availableForms[index].title,
+                userId: vm.availableForms[index].userId
             };
         }
 

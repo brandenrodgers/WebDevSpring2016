@@ -6,9 +6,11 @@
         .module("FormBuilderApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $rootScope, $location, UserService){
+    function LoginController($rootScope, $location, UserService){
+        var vm = this;
+        vm.login = login;
 
-        $scope.login = login;
+        vm.errorMessage = null;
 
         function login(user){
             UserService
@@ -19,7 +21,7 @@
                         $location.url("/profile");
                     }
                     else {
-                        $scope.errorMessage = "Invalid Credentials";
+                        vm.errorMessage = "Invalid Credentials";
                     }
                 });
         }
