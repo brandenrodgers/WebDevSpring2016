@@ -152,15 +152,10 @@ module.exports = function() {
                     if(forms[x].fields[y]._id == fieldId){
                         if (direction.direction == "UP"){
                             var newIndex = parseInt(y) - 1;
-                            console.log("UP");
                         }
                         else {
                             var newIndex = parseInt(y) + 1;
-                            console.log("DOWN");
                         }
-                        console.log(forms[x].fields);
-                        console.log(y);
-                        console.log(newIndex);
                         if (newIndex >= forms[x].fields.length || newIndex < 0) {
                             return null;
                         }
