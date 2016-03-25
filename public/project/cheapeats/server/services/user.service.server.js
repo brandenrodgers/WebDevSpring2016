@@ -12,6 +12,7 @@ module.exports = function(app, dealModel, userModel) {
     function register(req, res) {
         var user = req.body;
         user = userModel.createUser(user);
+        req.session.currentUser = user;
         res.json(user);
     }
 
@@ -24,17 +25,16 @@ module.exports = function(app, dealModel, userModel) {
     function login(req, res) {
         var credentials = req.body;
         var user = userModel.findUserByCredentials(credentials);
+        req.session.currentUser = user;
         res.json(user);
     }
 
     function loggedIn(req, res) {
-        //TODO update this once I use session
-        var user = {field: "test user"};
-        res.json(user);
+        res.json(req.session.currentUser);
     }
 
     function logout(req, res) {
-        //TODO update this once I use session
+        req.session.destroy();
         res.send(200);
     }
 

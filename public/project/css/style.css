@@ -73,7 +73,7 @@ body{
 	color: #ACEAFA;
 }
 .header-bottom{
-	background:#fff;
+	background:#fffcf1;
 	padding:2% 0;
 	border-bottom: 2px solid black;
 }
@@ -84,6 +84,7 @@ body{
 
 .deal-image {
 	margin: auto;
+	height: 200px;
 }
 
 /*--menu--*/
@@ -91,6 +92,11 @@ body{
 .menu{
 	float:left;
 	margin-top: 6px;
+	margin-left: 20px;
+}
+.menu ul li a:hover {
+	background: rgba(255, 174, 0, 0.5);
+	border-radius: 10px;
 }
 /* start menu */
 .h_nav h4{
@@ -124,7 +130,7 @@ body{
 }
 .header-bottom-left{
 	float:left;
-	width: 64.5%;
+	width: 100%;
 	margin-top:10px;
 }
 .header-bottom-right{
@@ -555,11 +561,6 @@ span.reducedfrom {
 .top-box1{
 	margin-bottom:4%;
 }
-.left-banner{
-	background: url(../images/t-img1.jpg)no-repeat 0px 0px;
-	width:226px;
-	height:450px;
-}
 .top-border{
 	border-top:5px solid #4cb1ca;
 }
@@ -731,35 +732,7 @@ p.m_2{
 	color:#fff;
 	font-size:0.8125em;
 }
-.recent-tweet {
-	margin-bottom: 1em;
-}
-.recent-tweet-icon {
-	float: left;
-	width: 16.5%;
-	margin:0% 2.6% 0 0;
-}
-.recent-tweet-icon span {
-	width:50px;
-	height:50px;
-	display: block;
-	background: url(../images/f-tw.png) no-repeat;
-}
-.recent-tweet-info {
-	float: right;
-	width:77.5%;
-}
-.recent-tweet-info p{
-	color:#fff;
-	font-size:0.85em;
-	line-height:1.8em;
-}
-.recent-tweet-info p a{
-	color:#ACEAFA;
-}
-.recent-tweet-info p a:hover{
-	color:#fff;
-}
+
 ul.f-list1 li {
 	list-style-image: url(../images/f-icon.png);
 	margin: 0 15px 5px;
@@ -931,6 +904,7 @@ ul.f-list1 li a:hover {
 .login{
 	border-top:1px solid #ddd;
 	padding:2% 0;
+	height: 75vh;
 }
 .col_1_of_login:first-child {
 	margin-left: 0;
@@ -1042,6 +1016,7 @@ table {
 .register_account{
 	border-top:1px solid #ddd;
 	padding:2% 0;
+	height: 75vh;
 }
 .register_account table td {
 	width: 100%;
@@ -2265,7 +2240,7 @@ ul.delivery-list li a:hover{
 		margin-right:0%;
 	}
 	.header-bottom-left {
-		width:66.5%;
+		width:100%;
 	}
 	.search {
 		margin: 5px 3px 0 0;
@@ -2459,6 +2434,7 @@ ul.delivery-list li a:hover{
 	.menu {
 		float: none;
 		margin-top: 6px;
+		margin-left: 0;
 	}
 	.header-bottom-left {
 		width: 100%;
@@ -2636,6 +2612,7 @@ ul.delivery-list li a:hover{
 	.menu {
 		float: none;
 		margin-top: 6px;
+		margin-left: 0;
 	}
 	.header-bottom-left {
 		width: 100%;
@@ -2803,6 +2780,7 @@ ul.delivery-list li a:hover{
 	.menu {
 		float: none;
 		margin-top: 6px;
+		margin-left: 0;
 	}
 	.header-bottom-left {
 		width: 100%;
@@ -2998,6 +2976,7 @@ ul.delivery-list li a:hover{
 	.menu {
 		float: none;
 		margin-top: 6px;
+		margin-left: 0;
 	}
 	.header-bottom-left {
 		width: 100%;
@@ -3190,6 +3169,10 @@ ul.delivery-list li a:hover{
 	}
 }
 
+.profile-wrapper{
+	min-height: 75vh;
+}
+
 .slogan {
 	color: #fff;
 	padding: 8px 0 8px;
@@ -3200,6 +3183,19 @@ ul.delivery-list li a:hover{
 	background: #4cb1ca;
 	border: 2px solid black;
 	border-top: 0;
+}
+
+.about-wrapper{
+	min-height: 70vh;
+}
+
+.about-bottom{
+	text-align: center;
+	padding: 30px;
+	font-size: 40px;
+	background: #4cb1ca;
+	border-radius: 20px;
+	margin-top: 20px;
 }
 
 .search-pages-buttons{
@@ -3238,7 +3234,22 @@ ul.delivery-list li a:hover{
 	cursor: pointer;
 }
 
+.details-info{
+	background: #fffcf1;
+	padding: 15px;
+	min-height: 300px;
+	border-radius: 5px;
+}
+
+p.details-price{
+	color: #7db122;
+}
+
+span.details-reducedfrom{
+	color: #e60000;
+}
+
 a[type="submit"].details-buy-button{
 	color: white;
-	width: 60px;
+	width: 100px;
 }

@@ -39,8 +39,7 @@
         }
 
         function getCurrentUser() {
-            return $rootScope.currentUser;
-            //return $http.get("/api/cheapeats/loggedin");
+            return $http.get("/api/cheapeats/loggedin");
         }
 
         function getProfile() {

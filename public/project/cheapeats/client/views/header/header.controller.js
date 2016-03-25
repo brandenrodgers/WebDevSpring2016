@@ -17,7 +17,8 @@
         init();
 
         function logout(){
-            UserService.logout()
+            UserService
+                .logout()
                 .then(function(){
                     UserService.setCurrentUser(null);
                     $location.url("/home");

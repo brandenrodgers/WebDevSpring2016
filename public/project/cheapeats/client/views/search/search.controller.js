@@ -34,34 +34,42 @@
 
 
         function search(searchInfo){
-            vm.currentSearchInfo = searchInfo;
-            var data = {
-                location: searchInfo.location || null,
-                radius: searchInfo.radius || null,
-                per_page: 12,
-                category_slugs: "restaurants",
-                page: vm.currentPage
-            };
-
-            var config = {
-                params: data
+            vm.currentSearchInfo = searchInfo || {};
+            var reqData = {
+                params: {
+                    location: vm.currentSearchInfo.location || null,
+                    radius: vm.currentSearchInfo.radius || null,
+                    per_page: 18,
+                    category_slugs: "restaurants",
+                    page: vm.currentPage
+                }
             };
 
             SqootService
-                .searchDeals(config)
+                .searchDeals(reqData)
                 .then(function(response) {
-                    vm.totalPages = Math.ceil(response.data.query.total / response.data.query.per_page);
-                    sortResults(response.data.deals);
+                    if (response.data) {
+                        vm.totalPages = Math.ceil(response.data.query.total / response.data.query.per_page);
+                        var uniqueDeals = removeDuplicates(response.data.deals);
+                        vm.dealGroups = groupResults(uniqueDeals);
+                    }
                 });
         }
 
 
-        function sortResults(deals){
+        function removeDuplicates(deals){
+            var seen = {};
+            return deals.filter(function(deal) {
+                return seen[deal.deal.title] ? false : (seen[deal.deal.title] = true);
+            });
+        }
+
+        function groupResults(deals){
             var result = [];
             for(var i=0; i < deals.length; i+=3){
                 result.push(deals.slice(i, i+3));
             }
-            vm.dealGroups = result;
+            return result;
         }
 
         function firstPage(){

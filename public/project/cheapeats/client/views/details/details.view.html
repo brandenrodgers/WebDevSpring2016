@@ -5,11 +5,11 @@
                 <img class="etalage_thumb_image" ng-src="{{model.data.image_url}}" class="img-responsive" />
                 <div class="clearfix"></div>
             </div>
-            <div class="desc1 span_3_of_2">
+            <div class="desc1 span_3_of_2 details-info">
                 <h3 class="m_3">{{model.data.title}}</h3>
-                <p class="m_5">${{model.data.price}}
-                    <span class="reducedfrom">${{model.data.price + model.data.discount_amount}}</span>
-                    <a href="{{model.data.url}}" class="details-buy-button btn btn-primary" type="submit" role="button">Buy</a>
+                <p class="m_5 details-price">${{model.data.price}}
+                    <span class="reducedfrom details-reducedfrom">${{model.data.price + model.data.discount_amount}}</span>
+                    <a href="{{model.data.url}}" class="details-buy-button btn btn-primary" type="submit" role="button">Purchase</a>
                 </p>
                 <div class="btn_form">
                     <form>

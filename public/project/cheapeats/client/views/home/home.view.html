@@ -5,7 +5,7 @@
                 <h2 class="head">Featured Deals</h2>
                 <div ng-repeat="dealGroup in model.dealGroups" class="top-box">
                     <div ng-repeat="deal in dealGroup" class="col_1_of_3 span_1_of_3">
-                        <a href="{{deal.deal.url}}">
+                        <a href="#/details/{{deal.deal.id}}">
                             <div class="inner_content clearfix">
                                 <div class="product_image">
                                     <img class="deal-image" ng-src="{{deal.deal.image_url}}" alt=""/>
@@ -14,7 +14,7 @@
                                     <div class="cart-left">
                                         <p class="title">{{deal.deal.short_title}}</p>
                                         <div class="price1">
-                                            <span class="reducedfrom">${{deal.deal.price + deal.deal.discount_amount}}</span>
+                                            <span class="reducedfrom">${{(deal.deal.price + deal.deal.discount_amount).toFixed(2)}}</span>
                                             <span class="actual">${{deal.deal.price}}</span>
                                         </div>
                                     </div>

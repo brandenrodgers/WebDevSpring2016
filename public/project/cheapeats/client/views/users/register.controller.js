@@ -35,7 +35,7 @@
                         if (response.data) {
                             UserService.setCurrentUser(response.data);
                             vm.errorMessage = null;
-                            $location.url("/profile");
+                            $location.url("/profile/" + response.data.username);
                         }
                         else {
                             vm.errorMessage = "Error creating account"
