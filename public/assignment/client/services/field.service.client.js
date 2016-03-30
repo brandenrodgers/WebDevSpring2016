@@ -14,7 +14,7 @@
             deleteFieldFromForm: deleteFieldFromForm,
             createFieldForForm: createFieldForForm,
             updateField: updateField,
-            moveField: moveField
+            reorderFields: reorderFields
         };
 
         return service;
@@ -39,8 +39,8 @@
             return $http.put("/api/assignments/form/" + formId + "/field/" + fieldId, field);
         }
 
-        function moveField(formId, fieldId, direction){
-            return $http.post("/api/assignments/form/" + formId + "/field/" + fieldId + "/move", direction);
+        function reorderFields(formId, fields){
+            return $http.post("/api/assignments/form/" + formId + "/field/reorder", fields);
         }
     }
 

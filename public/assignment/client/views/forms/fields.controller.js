@@ -4,9 +4,35 @@
 (function(){
     angular
         .module("FormBuilderApp")
+        .directive("fieldSortable", fieldSortable)
         .controller("FieldController", FieldController);
 
-    function FieldController($routeParams, fieldService, formService) {
+    function fieldSortable(){
+        var start = null;
+        var end = null;
+        function link(scope, element) {
+            $(element).sortable({
+                axis: "y",
+                start: function(event, ui) {
+                    start = ui.item.index();
+                },
+                stop: function(event, ui) {
+                    end = ui.item.index();
+                    var temp = scope.fields[start];
+                    scope.fields[start] = scope.fields[end];
+                    scope.fields[end] = temp;
+                    scope.applySort();
+                },
+                handle: ".dragMe",
+            });
+        }
+        return {
+            restrict: "EA",
+            link: link
+        }
+    }
+
+    function FieldController($scope, $routeParams, fieldService, formService) {
         var vm = this;
 
         vm.form = {};
@@ -17,23 +43,37 @@
         vm.typeArray = ["All", "Single Line Text", "Multi Line Text", "Date", "Dropdown", "Checkboxes", "Radio Buttons"];
         vm.selection = vm.typeArray[0];
 
+        $scope.applySort = applySort;
         vm.addField = addField;
         vm.removeField = removeField;
         vm.editField = editField;
         vm.updateFieldType = updateFieldType;
         vm.closePopup = closePopup;
         vm.applyChanges = applyChanges;
-        vm.moveFieldUp = moveFieldUp;
-        vm.moveFieldDown = moveFieldDown;
 
         function init(){
             formService
                 .findFormById(vm.formId)
                 .then(function(response){
-                   vm.form = response.data;
+                    vm.form = response.data;
+                    $scope.fields = vm.form.fields;
                 });
         }
         init();
+
+        function applySort(){
+            fieldService
+                .reorderFields(vm.formId, $scope.fields)
+                .then(function(response){
+                    console.log(response);
+                    if(response.data){
+                        vm.form.fields = response.data;
+                    }
+                    else {
+                        console.log("Uh oh, Bad Response");
+                    }
+                })
+        }
 
         function addField(fieldType){
             fieldService
@@ -41,6 +81,7 @@
                 .then(function(response){
                     if (response.data){
                         vm.form.fields.push(response.data);
+                        $scope.fields = vm.form.fields;
                     }
                     else {
                         console.log("Uh oh, Bad Response");
@@ -125,9 +166,7 @@
                                 break;
                             }
                         }
-                        vm.fieldEditor = false;
-                        vm.selectedField = null;
-                        vm.popupTitle = null;
+                        closePopup()
                     }
                     else {
                         console.log("Uh oh, Bad Response");
@@ -141,31 +180,6 @@
             vm.popupTitle = null;
         }
 
-        function moveFieldUp(fieldId){
-            fieldService
-                .moveField(vm.formId, fieldId, {direction: "UP"})
-                .then(function(response){
-                    if (response.data){
-                        vm.form.fields = response.data;
-                    }
-                    else {
-                        console.log("Uh oh, Bad Response");
-                    }
-                });
-        }
-
-        function moveFieldDown(fieldId){
-            fieldService
-                .moveField(vm.formId, fieldId, {direction: "DOWN"})
-                .then(function(response){
-                    if (response.data){
-                        vm.form.fields = response.data;
-                    }
-                    else {
-                        console.log("Uh oh, Bad Response");
-                    }
-                });
-        }
     }
 
 })();

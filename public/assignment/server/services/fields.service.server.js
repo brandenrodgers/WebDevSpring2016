@@ -8,7 +8,7 @@ module.exports = function(app, formModel) {
     app.delete("/api/assignments/form/:formId/field/:fieldId", deleteField);
     app.post("/api/assignments/form/:formId/field", createField);
     app.put("/api/assignments/form/:formId/field/:fieldId", updateField);
-    app.post("/api/assignments/form/:formId/field/:fieldId/move", moveField);
+    app.post("/api/assignments/form/:formId/field/reorder", reorderFields);
 
 
     function findFields(req, res) {
@@ -47,11 +47,10 @@ module.exports = function(app, formModel) {
         res.send(field);
     }
 
-    function moveField(req, res) {
+    function reorderFields(req, res) {
         var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var direction = req.body;
-        var fields = formModel.moveFormField(formId, fieldId, direction);
+        var fields = req.body;
+        fields = formModel.reorderFormFields(formId, fields);
         res.send(fields);
     }
 

@@ -15,7 +15,7 @@ module.exports = function() {
         deleteFormField: deleteFormField,
         createFormField: createFormField,
         updateFormField: updateFormField,
-        moveFormField: moveFormField
+        reorderFormFields: reorderFormFields
     };
     return api;
 
@@ -145,25 +145,11 @@ module.exports = function() {
         return null;
     }
 
-    function moveFormField(formId, fieldId, direction){
+    function reorderFormFields(formId, fields){
         for(var x in forms){
             if(forms[x]._id == formId){
-                for(var y in forms[x].fields){
-                    if(forms[x].fields[y]._id == fieldId){
-                        if (direction.direction == "UP"){
-                            var newIndex = parseInt(y) - 1;
-                        }
-                        else {
-                            var newIndex = parseInt(y) + 1;
-                        }
-                        if (newIndex >= forms[x].fields.length || newIndex < 0) {
-                            return null;
-                        }
-                        forms[x].fields.splice(newIndex, 0, forms[x].fields.splice(y, 1)[0]);
-                        return forms[x].fields;
-
-                    }
-                }
+                forms[x].fields = fields;
+                return fields;
             }
         }
         return null;
