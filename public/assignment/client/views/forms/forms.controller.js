@@ -14,12 +14,15 @@
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
+        vm.availableForms = [];
 
         function init() {
             formService
                 .findAllForms($rootScope.currentUser._id)
                 .then(function (response) {
-                    vm.availableForms = response.data;
+                    if (response.data) {
+                        vm.availableForms = response.data;
+                    }
                 });
         }
         init();
