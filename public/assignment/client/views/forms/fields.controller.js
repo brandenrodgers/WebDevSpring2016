@@ -40,8 +40,6 @@
         vm.fieldType = "Single Line Text Field";
         vm.fieldEditor = false;
         vm.popupTitle = null;
-        vm.typeArray = ["All", "Single Line Text", "Multi Line Text", "Date", "Dropdown", "Checkboxes", "Radio Buttons"];
-        vm.selection = vm.typeArray[0];
 
         $scope.applySort = applySort;
         vm.addField = addField;
@@ -151,7 +149,7 @@
                             value: optionsLines[x].split(":")[1]
                         };
                         newOptions.push(newOption);
-                    }
+                    }"56fde9c3d7c0302edfa87321"
                 }
                 field.options = newOptions;
             }
