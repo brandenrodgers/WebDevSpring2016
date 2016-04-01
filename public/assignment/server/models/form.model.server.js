@@ -39,7 +39,7 @@ module.exports = function(db, mongoose) {
     function findAllForms(userId) {
         var deferred = q.defer();
 
-        FormModel.find({userId: {$eq: userId}}, function (err, doc) {
+        FormModel.find({userId: userId}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
