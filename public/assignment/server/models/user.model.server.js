@@ -1,11 +1,18 @@
 /**
  * Created by branden on 3/16/16.
  */
-var users = require('./user.mock.json');
-module.exports = function() {
+var q = require('q');
+
+module.exports = function(db, mongoose) {
+
+    //load user schema
+    var userSchema = require('./user.schema.server.js')(mongoose);
+
+    //create user model from schema
+    var UserModel = mongoose.model('User', userSchema);
+
     var api = {
         createUser: createUser,
-        findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         findAllUsers: findAllUsers,
         findUserById: findUserById,
@@ -15,64 +22,95 @@ module.exports = function() {
     return api;
 
     function createUser(user) {
-        user._id = (new Date()).getTime();
-        users.push(user);
-        return user;
-    }
+        var deferred = q.defer();
 
-    function findUserByUsername(username){
-        for(var x in users){
-            if(users[x].username == username){
-                return users[x];
+        // Insert new object
+        UserModel.create(user, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return null;
+
+        });
+
+        return deferred.promise;
     }
 
     function findUserByCredentials(credentials){
-        for(var x in users){
-            if(users[x].username == credentials.username && users[x].password == credentials.password){
-                return users[x];
-            }
-        }
-        return null;
+        var deferred = q.defer();
+
+        // Retrieve one document
+        UserModel.findOne(
+            // first argument is predicate
+            { username: credentials.username,
+                password: credentials.password },
+
+            function(err, doc) {
+
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+
+            });
+
+        return deferred.promise;
     }
 
     function findAllUsers() {
-        return users;
+        var deferred = q.defer();
+
+        UserModel.find({}, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
     }
 
     function findUserById(userId) {
-        for(var x in users){
-            if(users[x]._id == userId){
-                return users[x];
+        var deferred = q.defer();
+
+        UserModel.findById(userId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return null;
+        });
+        return deferred.promise;
     }
 
     function updateUser(userId, user) {
-        var result = null;
-        for(var x in users){
-            if(users[x]._id == userId){
-                users[x].firstName = user.firstName || users[x].firstName;
-                users[x].lastName = user.lastName || users[x].lastName;
-                users[x].username = user.username || users[x].username;
-                users[x].password = user.password || users[x].password;
-                result = users[x];
-                break;
+        var deferred = q.defer();
+
+        UserModel.update(userId, user, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
-        return result;
+        });
+
+        return deferred.promise;
     }
 
     function deleteUser(userId) {
-        for(var x in users){
-            if(users[x]._id == userId){
-                users[x].splice(x,1);
-                return;
+        var deferred = q.defer();
+
+        UserModel.findByIdAndRemove(userId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
             }
-        }
+        });
+
+        return deferred.promise;
     }
 
 

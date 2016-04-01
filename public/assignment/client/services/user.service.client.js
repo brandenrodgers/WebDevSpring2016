@@ -10,9 +10,9 @@
 
         var service = {
             setCurrentUser: setCurrentUser,
+            logoutUser: logoutUser,
             getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
-            findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUser: deleteUser,
@@ -25,8 +25,12 @@
             $rootScope.currentUser = user;
         }
 
+        function logoutUser(){
+            return $http.post("/api/assignments/logout");
+        }
+
         function getCurrentUser(){
-            return $rootScope.currentUser;
+            return $http.get("/api/assignments/loggedin");
         }
 
         function findUserByCredentials(username, password){
@@ -35,13 +39,6 @@
                 password: password
             };
             return $http.post("/api/assignments/creds", credentials);
-        }
-
-        function findUserByUsername(username){
-            var data = {
-                username: username
-            };
-            return $http.post("/api/assignments/username", data);
         }
 
         function findAllUsers(){

@@ -1,6 +1,7 @@
 // simple express server
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 var multer = require('multer');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -8,6 +9,19 @@ var session       = require('express-session');
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+
+var connectionString = 'mongodb://127.0.0.1:27017/webdev2016';
+// use remote connection string if running in remote server
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+
+// connect to the database
+var db = mongoose.connect(connectionString);
 
 app.use(multer());
 app.use(bodyParser.json());
@@ -43,7 +57,7 @@ app.get('/', function(req, res){
     res.sendfile((__dirname + '/index.html'));
 });
 
-require('./public/assignment/server/app.js')(app);
+require('./public/assignment/server/app.js')(app, db, mongoose);
 require('./public/project/cheapeats/server/app.js')(app);
 require('./public/experiments/telestrations/server/app.js')(app);
 

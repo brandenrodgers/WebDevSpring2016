@@ -12,7 +12,6 @@
             createForm: createForm,
             findAllForms: findAllForms,
             findFormById: findFormById,
-            findFormByTitle: findFormByTitle,
             updateForm: updateForm,
             deleteForm: deleteForm
         };
@@ -20,20 +19,12 @@
         return service;
 
         function createForm(userId, form){
-            form._id = (new Date).getTime();
             form.userId = userId;
             return $http.post("/api/assignments/form", form);
         }
 
         function findFormById(formId){
             return $http.get("/api/assignments/form/" + formId);
-        }
-
-        function findFormByTitle(title){
-            var data = {
-                title: title
-            };
-            return $http.post("/api/assignments/title", data);
         }
 
         function findAllForms(userId){

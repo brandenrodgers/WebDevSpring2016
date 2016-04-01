@@ -65,7 +65,6 @@
             fieldService
                 .reorderFields(vm.formId, $scope.fields)
                 .then(function(response){
-                    console.log(response);
                     if(response.data){
                         vm.form.fields = response.data;
                     }
@@ -80,7 +79,7 @@
                 .createFieldForForm(vm.formId, {type: fieldType})
                 .then(function(response){
                     if (response.data){
-                        vm.form.fields.push(response.data);
+                        vm.form.fields = response.data;
                         $scope.fields = vm.form.fields;
                     }
                     else {
