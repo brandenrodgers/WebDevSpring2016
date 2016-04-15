@@ -174,6 +174,7 @@ module.exports = function(app, userModel) {
     function updateUserProfile(req, res) {
         var newUser = req.body;
         var userId = req.params.id;
+        delete newUser._id;
 
         if (newUser.password) {
             newUser.password = bcrypt.hashSync(newUser.password);
@@ -201,6 +202,7 @@ module.exports = function(app, userModel) {
     function updateUserAdmin(req, res) {
         var newUser = req.body;
         var userId = req.params.id;
+        delete newUser._id;
 
         if(!isAdmin(req.user)) {
             delete newUser.roles;
