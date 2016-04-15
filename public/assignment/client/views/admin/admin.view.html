@@ -9,18 +9,24 @@
             <thead>
                 <tr>
                     <th ng-click="model.sortByUsername(model.sort.username.down)" class="admin-sort">
-                        <span ng-show="model.sort.username.active"
+                        <span ng-show="model.sort.username.active && model.sort.username.down"
+                              class="glyphicon glyph-btn glyphicon glyphicon-triangle-bottom glyphicon-lg"></span>
+                        <span ng-show="model.sort.username.active && !model.sort.username.down"
                               class="glyphicon glyph-btn glyphicon glyphicon-triangle-top glyphicon-lg"></span>
                         Username
                     </th>
                     <th>Password</th>
                     <th ng-click="model.sortByFirst(model.sort.first.down)" class="admin-sort">
-                        <span ng-show="model.sort.first.active"
+                        <span ng-show="model.sort.first.active && model.sort.first.down"
+                              class="glyphicon glyph-btn glyphicon glyphicon-triangle-bottom glyphicon-lg"></span>
+                        <span ng-show="model.sort.first.active && !model.sort.first.down"
                               class="glyphicon glyph-btn glyphicon glyphicon-triangle-top glyphicon-lg"></span>
                         First Name
                     </th>
                     <th ng-click="model.sortByLast(model.sort.last.down)" class="admin-sort">
-                        <span ng-show="model.sort.last.active"
+                        <span ng-show="model.sort.last.active && model.sort.last.down"
+                              class="glyphicon glyph-btn glyphicon glyphicon-triangle-bottom glyphicon-lg"></span>
+                        <span ng-show="model.sort.last.active && !model.sort.last.down"
                               class="glyphicon glyph-btn glyphicon glyphicon-triangle-top glyphicon-lg"></span>
                         Last Name
                     </th>
