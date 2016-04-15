@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var multer = require('multer');
+var passport = require('passport');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session       = require('express-session');
@@ -23,14 +24,17 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 // connect to the database
 var db = mongoose.connect(connectionString);
 
-app.use(multer());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+multer();
 app.use(cookieParser());
 app.use(session({
     secret: process.env.PASSPORT_SECRET || "My Secret",
     resave: true,
     saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
 // Add headers

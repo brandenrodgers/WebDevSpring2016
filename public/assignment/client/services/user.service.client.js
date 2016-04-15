@@ -10,13 +10,16 @@
 
         var service = {
             setCurrentUser: setCurrentUser,
+            loginUser: loginUser,
             logoutUser: logoutUser,
             getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
+            registerUser: registerUser,
             deleteUser: deleteUser,
-            updateUser: updateUser
+            updateUserAdmin: updateUserAdmin,
+            updateUserProfile: updateUserProfile
         };
 
         return service;
@@ -27,6 +30,10 @@
 
         function logoutUser(){
             return $http.post("/api/assignments/logout");
+        }
+
+        function loginUser(user){
+            return $http.post("/api/assignments/login", user);
         }
 
         function getCurrentUser(){
@@ -45,6 +52,10 @@
             return $http.get("/api/assignments/user");
         }
 
+        function registerUser(user){
+            return $http.post("/api/assignments/register", user);
+        }
+
         function createUser(user){
             return $http.post("/api/assignments/user", user);
         }
@@ -53,8 +64,12 @@
             return $http.delete("/api/assignments/user/" + userId);
         }
 
-        function updateUser(userId, user){
+        function updateUserAdmin(userId, user){
             return $http.put("/api/assignments/user/" + userId, user);
+        }
+
+        function updateUserProfile(userId, user){
+            return $http.put("/api/assignments/userprofile/" + userId, user);
         }
 
     }

@@ -28,7 +28,7 @@
             }
 
             UserService
-                .createUser(user)
+                .registerUser(user)
                 .then(function(response){
                     UserService.setCurrentUser(response.data);
                     $location.url("/profile");

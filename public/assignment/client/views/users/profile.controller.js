@@ -6,28 +6,18 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($location, UserService){
+    function ProfileController($location, $rootScope, UserService){
         var vm = this;
         vm.message = null;
         vm.errorMessage = null;
 
-        vm.currentUser = {};
-        var preservedUserInfo = {};
+        vm.currentUser = $rootScope.currentUser;
+        var preservedUserInfo = preserveInfo(vm.currentUser);
 
         function init() {
-            UserService
-                .getCurrentUser()
-                .then(function(response){
-                    if (response.data) {
-                        vm.currentUser = response.data;
-                        preservedUserInfo = preserveInfo(vm.currentUser);
-                    }
-                    else {
-                        $location.url("/home");
-                    }
-                });
+            delete vm.currentUser.password;
         }
-        init();
+       init();
 
         vm.update = update;
 
@@ -40,14 +30,9 @@
                 vm.currentUser.username = preservedUserInfo.username;
                 return;
             }
-            if (!vm.currentUser.password){
-                vm.errorMessage = "Password cannot be empty";
-                vm.currentUser.password = preservedUserInfo.password;
-                return;
-            }
 
             UserService
-                .updateUser(vm.currentUser._id, vm.currentUser)
+                .updateUserProfile(vm.currentUser._id, vm.currentUser)
                 .then(function(response){
                     UserService.setCurrentUser(response.data);
                     preservedUserInfo = preserveInfo(response.data);
