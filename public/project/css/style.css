@@ -169,7 +169,7 @@ body{
 	text-indent: -9999px;
 	outline:none;
 	cursor: pointer;
-	background: url("../images/search.png") no-repeat 0px 3px; 
+	background: url("../cheapeats/client/images/search.png") no-repeat 0px 3px;
 	width:30px;
 	height:25px;
 	padding:8px;
@@ -317,7 +317,7 @@ body{
 	vertical-align:middle;
 }
 .c1{
-	background: url(../images/tag.png) no-repeat 0px 0px;
+	background: url(../cheapeats/client/images/tag.png) no-repeat 0px 0px;
 	width:42px;
 	height:42px;
 	display: inline-block;
@@ -441,6 +441,19 @@ h2.head{
 	
 }
 
+.new-deal-btn-wrapper {
+	text-align: center;
+}
+
+.new-deal-btn{
+	background: #7db122;
+	width: 150px;
+}
+
+.full-width {
+	width: 100%;
+}
+
 .product_image img{
 	display:block;
 	border:1px solid #f0f0f0;
@@ -492,7 +505,7 @@ p.title a:hover{
 }
 .plus-right {
 	float: right;
-	background: url(../images/icons/plus-icon.png)2px 0px #7db122;
+	background: url(../cheapeats/client/images/icons/plus-icon.png)2px 0px #7db122;
 	border-radius: 100px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
@@ -504,7 +517,7 @@ p.title a:hover{
 }
 .span_1_of_3:hover .plus-right{
 	float: right;
-	background: url(../images/icons/plus2-icon.png)2px 0px #000;
+	background: url(../cheapeats/client/images/icons/plus2-icon.png)2px 0px #000;
 	border-radius: 100px;
 	width: 40px;
 	height: 40px;
@@ -734,7 +747,7 @@ p.m_2{
 }
 
 ul.f-list1 li {
-	list-style-image: url(../images/f-icon.png);
+	list-style-image: url(../cheapeats/client/images/f-icon.png);
 	margin: 0 15px 5px;
 }
 ul.f-list1 li a {
@@ -773,7 +786,7 @@ ul.f-list1 li a:hover {
 	height: 40px;
 	width: 40px;
 	display: block;
-	background: url(../images/img-sprite.png);
+	background: url(../cheapeats/client/images/img-sprite.png);
 }
 .social-media li a:hover {
 	zoom: 1;
@@ -856,16 +869,16 @@ ul.f-list1 li a:hover {
 }
 /*------------end social simptip----------------*/
 .social-media li:nth-child(1) a{
-	background: url(../images/img-sprite.png) -20px -170px;
+	background: url(../cheapeats/client/images/img-sprite.png) -20px -170px;
 }
 .social-media li:nth-child(2) a{
-	background: url(../images/img-sprite.png) -68px -170px;
+	background: url(../cheapeats/client/images/img-sprite.png) -68px -170px;
 }
 .social-media li:nth-child(3) a{
-	background: url(../images/img-sprite.png) -112px -170px;
+	background: url(../cheapeats/client/images/img-sprite.png) -112px -170px;
 }
 .social-media li:nth-child(4) a{
-	background: url(../images/img-sprite.png) -157px -170px;
+	background: url(../cheapeats/client/images/img-sprite.png) -157px -170px;
 }
 /*--footer-bottom--*/
 .footer-bottom{
@@ -1247,7 +1260,7 @@ ul.dc_pagination li a:hover{
 	background: transparent;
 }
 .metro.focus:after{
-	background:url(../images/minus.gif);
+	background:url(../cheapeats/client/images/minus.gif);
 	width: 13px;
 	height: 13px;
 	right: 10px;
@@ -1261,7 +1274,7 @@ ul.dc_pagination li a:hover{
 	right: 10px;
 	top: 50%;
 	margin-top: -4px;
-	background: url(../images/plus.gif);
+	background: url(../cheapeats/client/images/plus.gif);
 	width: 13px;
 	height: 13px;
 	-webkit-transform-origin: 50% 20%;
@@ -1870,11 +1883,11 @@ p.m_text{
 }
 .nbs-flexisel-nav-left {
 	left: 0px;
-	background: url(../images/img-sprite.png) no-repeat -23px -217px;
+	background: url(../cheapeats/client/images/img-sprite.png) no-repeat -23px -217px;
 }
 .nbs-flexisel-nav-right {
 	right: 0px;
-	background: url(../images/img-sprite.png) no-repeat -51px -217px;
+	background: url(../cheapeats/client/images/img-sprite.png) no-repeat -51px -217px;
 }
 .toogle{
 	margin-top:4%;
@@ -2045,7 +2058,7 @@ p.m_text2{
 	display: block;
 	width: 41px;
 	height: 38px;
-	background: url(../images/quotes.png) 0 0 no-repeat;
+	background: url(../cheapeats/client/images/quotes.png) 0 0 no-repeat;
 	content: "";
 }
 .testimonials .testi-item blockquote > a:hover {
@@ -2084,7 +2097,7 @@ span.rollover {
 	-o-transition-duration: 1s;
 	-moz-transition-duration: 1s;
 	-webkit-transition: -webkit-transform 1s;
-	background: url(../images/magnify-alt.png) center center no-repeat rgba(0, 0, 0, 0.4);
+	background: url(../cheapeats/client/images/magnify-alt.png) center center no-repeat rgba(0, 0, 0, 0.4);
 	cursor: pointer;
 	height: 215px;
 	width: 252px;
@@ -2111,7 +2124,7 @@ ul.delivery-list{
 ul.delivery-list li{
 	font-size: 0.85em;
 	margin: 0 0 8px 10px;
-	list-style-image: url(../images/list_marker.png);
+	list-style-image: url(../cheapeats/client/images/list_marker.png);
 }
 ul.delivery-list li a{
 	color: #777;
@@ -2575,7 +2588,6 @@ ul.delivery-list li a:hover{
 		width: 100%;
 	}	
 	.col_1_of_login {
-		float: none;
 		margin: 1% 0 1% 0%;
 	}
 	.icon1 ul {
@@ -2753,7 +2765,6 @@ ul.delivery-list li a:hover{
 		width: 100%;
 	}	
 	.col_1_of_login {
-		float: none;
 		margin: 1% 0 1% 0%;
 	}
 }
@@ -2921,7 +2932,6 @@ ul.delivery-list li a:hover{
 		width: 100%;
 	}	
 	.col_1_of_login {
-		float: none;
 		margin: 1% 0 1% 0%;
 	}
 	.span_1_of_3 {

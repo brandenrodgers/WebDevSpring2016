@@ -1,0 +1,33 @@
+<div class="register_account">
+    <div class="wrap">
+        <h4 class="title">Create a new Deal</h4>
+        <p class="register-required-field">* = Required Field</p>
+        <form>
+            <div class="col_1_of_2 span_1_of_2">
+                <div>
+                    <input ng-model="model.deal.title" type="text" placeholder="Full Title">
+                    <span class="register-required-field">*</span>
+                </div>
+                <div>
+                    <input ng-model="model.deal.discount_amount"  type="text" placeholder="Discount amount">
+                </div>
+                <div>
+                    <input ng-model="model.deal.short_title" type="text" placeholder="Short Title">
+                    <span class="register-required-field">*</span>
+                </div>
+            </div>
+            <div class="col_1_of_2 span_1_of_2">
+                <div><input ng-model="model.deal.price" type="text" placeholder="Price"></div>
+                <div><input ng-model="model.deal.image_url" type="text" placeholder="Image url"></div>
+                <div>
+                    <input ng-model="model.deal.description" type="text" placeholder="Description">
+                    <span class="register-required-field">*</span>
+                </div>
+                <div class="register-error-txt" ng-show="model.errorMessage">{{model.errorMessage}}</div>
+                <button ng-hide="model.editing" ng-click="model.createDeal(model.deal)" class="grey">Create Deal</button>
+                <button ng-show="model.editing" ng-click="model.updateDeal(model.deal)" class="grey">Update Deal</button>
+            </div>
+            <div class="clear"></div>
+        </form>
+    </div>
+</div>

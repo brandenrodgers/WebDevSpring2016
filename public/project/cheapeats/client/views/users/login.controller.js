@@ -31,10 +31,7 @@
                 return;
             }
             UserService
-                .login({
-                    username: user.username,
-                    password: user.password
-                })
+                .login(user)
                 .then(function(response){
                     if(response.data) {
                         UserService.setCurrentUser(response.data);

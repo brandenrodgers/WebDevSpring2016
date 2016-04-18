@@ -21,6 +21,7 @@
                 <div id="loginbox" class="loginbox">
                     <form name="login" id="login-form">
                         <fieldset class="input">
+                            <div class="login-error" ng-show="errorMessage">{{errorMessage}}</div>
                             <p id="login-form-username">
                                 <label for="inputUName">Username</label>
                                 <input id="inputUName" ng-model="model.user.username" type="text" class="inputbox" size="18" autocomplete="off">

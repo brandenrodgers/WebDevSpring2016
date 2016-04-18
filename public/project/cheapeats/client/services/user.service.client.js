@@ -18,8 +18,8 @@
         };
         return api;
 
-        function login(credentials) {
-            return $http.post("/api/cheapeats/login", credentials);
+        function login(user) {
+            return $http.post("/api/cheapeats/login", user);
         }
 
         function logout() {
@@ -27,12 +27,13 @@
         }
 
         function updateUser(user) {
-            return $http.put("/api/cheapeats/update", user);
+            return $http.put("/api/cheapeats/update/" + user._id, user);
         }
 
         function createUser(user) {
             return $http.post("/api/cheapeats/register", user);
         }
+
 
         function setCurrentUser(user) {
             $rootScope.currentUser = user;

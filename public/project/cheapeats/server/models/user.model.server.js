@@ -1,63 +1,53 @@
 /**
  * Created by branden on 3/3/16.
  */
-var mock = require("./user.mock.json");
-module.exports = function() {
+module.exports = function(db, mongoose) {
+
+    //load user schema
+    var userSchema = require('./user.schema.server.js')(mongoose);
+
+    //create user model from schema
+    var UserModel = mongoose.model('project.User', userSchema);
+
     var api = {
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
         updateUser: updateUser,
         findUserByCredentials: findUserByCredentials,
+        findUserByUsername: findUserByUsername,
+        findDealFavorites: findDealFavorites
     };
     return api;
 
     function createUser(user) {
-        user._id = (new Date()).getTime();
-        user.favorites = [];
-        mock.push(user);
-        return user;
+        return UserModel.create(user);
+    }
+
+    function findDealFavorites(dealId) {
+        return UserModel.find({favorites: dealId});
     }
 
     function updateUser(userId, user) {
-        userId = parseInt(userId);
-        for(var u in mock) {
-            if( mock[u]._id === userId ) {
-                mock[u] = user;
-                return;
-            }
-        }
+        return UserModel.update({_id: userId}, {$set: user});
     }
 
     function findUserById(userId) {
-        userId = parseInt(userId);
-        for(var u in mock) {
-            if( mock[u]._id === userId ) {
-                return mock[u];
-            }
-        }
-        return null;
+        return UserModel.findById(userId);
     }
 
     function findUsersByIds(userIds) {
-        var users = [];
-        for (var u in userIds) {
-            var userId = parseInt(userIds[u]);
-            var user = findUserById(userId);
-            if (user) {
-                users.push(user);
-            }
-        }
-        return users;
+        return UserModel.find({'_id': { $in: userIds}});
     }
 
     function findUserByCredentials(credentials) {
-        for(var u in mock) {
-            if( mock[u].username === credentials.username &&
-                mock[u].password === credentials.password) {
-                return mock[u];
-            }
-        }
-        return null;
+       return UserModel.findOne(
+            { username: credentials.username,
+                password: credentials.password });
+
+    }
+
+    function findUserByUsername(username){
+        return UserModel.findOne({username: username});
     }
 };

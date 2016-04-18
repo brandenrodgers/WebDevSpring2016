@@ -13,12 +13,21 @@
         vm.usernameBox = false;
         vm.passwordBox = false;
         vm.password2Box = false;
+        vm.user = {};
+        vm.user.roles = ["customer"];
 
         vm.register = register;
+        vm.toggleRole = toggleRole;
 
         function init() {
         }
         init();
+
+
+        function toggleRole(role){
+            console.log(role);
+            vm.user.roles = [role];
+        }
 
         function register(user) {
             var validForm = checkFormInputs(user);
@@ -29,7 +38,8 @@
                         password: user.password,
                         email: user.email,
                         city: user.city,
-                        state: user.state
+                        state: user.state,
+                        roles: user.roles
                     })
                     .then(function (response) {
                         if (response.data) {

@@ -1,53 +1,51 @@
 /**
  * Created by branden on 3/4/16.
  */
-module.exports = function() {
-    var deals = [];
+module.exports = function(db, mongoose) {
+
+    //load deal schema
+    var dealSchema = require('./deal.schema.server.js')(mongoose);
+
+    ////create deal model from schema
+    var DealModel = mongoose.model('Deal', dealSchema);
+
     var api = {
         findDealById: findDealById,
         findDealsByIds: findDealsByIds,
+        findLocalDeals: findLocalDeals,
         createDeal: createDeal,
-        updateDeal: updateDeal
+        updateDeal: updateDeal,
+        getUserLocalDeals: getUserLocalDeals,
+        findDealBySqootId: findDealBySqootId
     };
     return api;
 
     function findDealById(dealId) {
-        dealId = parseInt(dealId);
-        for(var deal in deals) {
-            if(deals[deal].id == dealId) {
-                return deals[deal];
-            }
-        }
-        return null;
+        return DealModel.findById(dealId);
+    }
+
+    function findLocalDeals() {
+        return DealModel.find({type: "LOCAL"});
     }
 
     function findDealsByIds(dealIds) {
-        var deals = [];
-        for (var id in dealIds) {
-            var dealId = parseInt(dealIds[id]);
-            var deal = findDealById(dealId);
-            if (deal) {
-                deals.push(deal);
-            }
-        }
-        return deals;
+        return DealModel.find({'_id': { $in: dealIds}});
+    }
+
+    function findDealBySqootId(sqootId) {
+        return DealModel.find({'sqootId': sqootId});
     }
 
     function createDeal(deal) {
-        deal.favorites= [];
-        deals.push(deal);
-        console.log("created new deal: " + deal.id);
-        return deal;
+        return DealModel.create(deal);
     }
 
     function updateDeal(dealId, deal) {
-        dealId = parseInt(dealId);
-        for(var d in deals) {
-            if(deals[d].dealId === dealId) {
-                deals[d] = deal;
-                return;
-            }
-        }
+        return DealModel.update({_id: dealId}, {$set: deal});
+    }
+
+    function getUserLocalDeals(userId) {
+        return DealModel.find({'userId': userId});
     }
 
 };

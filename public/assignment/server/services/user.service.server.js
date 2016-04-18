@@ -7,6 +7,10 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
 module.exports = function(app, userModel) {
+    //passport.use('assignment', new LocalStrategy(localStrategy));
+    //passport.serializeUser(serializeUser);
+    //passport.deserializeUser(deserializeUser);
+
     var auth = authorized;
     app.post("/api/assignments/user", auth, createUser);
     app.get("/api/assignments/user", auth, findAllUsers);
@@ -18,12 +22,8 @@ module.exports = function(app, userModel) {
 
     app.post("/api/assignments/register", registerUser);
     app.post("/api/assignments/logout", logoutUser);
-    app.post("/api/assignments/login", passport.authenticate('local'), loginUser);
+   // app.post("/api/assignments/login", passport.authenticate('assignment'), loginUser);
     app.get("/api/assignments/loggedin", loggedIn);
-
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
 
     function localStrategy(username, password, done) {
         userModel

@@ -1,37 +1,37 @@
 <div class="profile-wrapper">
     <h2 class="head">User Profile</h2>
-    <div ng-show="message" class="alert alert-success">{{message}}</div>
-    <div ng-show="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+    <div ng-show="model.message" class="alert alert-success">{{model.message}}</div>
+    <div ng-show="model.errorMessage" class="alert alert-danger">{{model.errorMessage}}</div>
 
     <form class="form-horizontal">
         <div class="form-group">
             <label for="inputUName" class="col-sm-2 control-label">Username:</label>
             <div class="col-sm-10">
-                <input ng-model="model.profile.username" type="text" class="form-control" id="inputUName" placeholder="Username">
+                <input ng-model="model.currentUser.username" type="text" class="form-control" id="inputUName" placeholder="Username">
             </div>
         </div>
         <div class="form-group">
             <label for="inputPwd" class="col-sm-2 control-label">Password:</label>
             <div class="col-sm-10">
-                <input  ng-model="model.profile.password" type="text" class="form-control" id="inputPwd" placeholder="Password">
+                <input  ng-model="model.currentUser.password" type="text" class="form-control" id="inputPwd" placeholder="Password">
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail" class="col-sm-2 control-label">Email:</label>
             <div class="col-sm-10">
-                <input ng-model="model.profile.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                <input ng-model="model.currentUser.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
             </div>
         </div>
         <div class="form-group">
             <label for="inputCity" class="col-sm-2 control-label">City:</label>
             <div class="col-sm-10">
-                <input ng-model="model.profile.city" type="text" class="form-control" id="inputCity" placeholder="City">
+                <input ng-model="model.currentUser.city" type="text" class="form-control" id="inputCity" placeholder="City">
             </div>
         </div>
         <div class="form-group">
             <label for="inputState" class="col-sm-2 control-label">State:</label>
             <div class="col-sm-10">
-                <input ng-model="model.profile.state" type="text" class="form-control" id="inputState" placeholder="State">
+                <input ng-model="model.currentUser.state" type="text" class="form-control" id="inputState" placeholder="State">
             </div>
         </div>
         <div class="form-group">
@@ -41,14 +41,19 @@
         </div>
     </form>
 
+    <div ng-hide='model.customer' class="col-sm-offset-2 col-sm-10 new-deal-btn-wrapper">
+        <a href="#/deal" class="btn btn-primary new-deal-btn" role="button">Create New Deal</a>
+    </div>
+
     <div class="main">
         <div class="wrap">
             <div class="section group">
                 <div class="cont span_3_of_3">
-                    <h2 class="head">Favorited Deals</h2>
+                    <h2 ng-show="model.customer" class="head">Favorited Deals</h2>
+                    <h2 ng-hide="model.customer" class="head">My Deals</h2>
                     <div class="top-box">
-                        <div ng-repeat="deal in model.profile.favoritesDeals" class="col_1_of_3 span_1_of_3">
-                            <a href="#/details/{{deal.deal.id}}">
+                        <div ng-repeat="deal in model.deals" class="col_1_of_3 span_1_of_3">
+                            <a href="{{model.customer ? '#/details/' : '#/deal/'}}{{deal._id}}">
                                 <div class="inner_content clearfix">
                                     <div class="product_image">
                                         <img ng-src="{{deal.image_url}}" alt=""/>
@@ -61,7 +66,7 @@
                                                 <span class="actual">${{deal.price}}</span>
                                             </div>
                                         </div>
-                                        <a href="#/details/{{deal.id}}">
+                                        <a href="{{model.customer ? '#/details/' : '#/deal/'}}{{deal._id}}">
                                             <div class="plus-right"></div>
                                         </a>
                                         <div class="clear"></div>

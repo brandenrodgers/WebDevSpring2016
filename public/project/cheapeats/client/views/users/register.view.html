@@ -19,6 +19,12 @@
                 <div><input ng-model="model.user.city" type="text" placeholder="City"></div>
                 <div><input ng-model="model.user.state" type="text" placeholder="State"></div>
                 <div class="register-error-txt" ng-show="model.errorMessage">{{model.errorMessage}}</div>
+                <div class="radio" ng-click="model.toggleRole('customer')">
+                    <label><input type="radio" checked='' name="optradio">Register as Customer</label>
+                </div>
+                <div class="radio" ng-click="model.toggleRole('business')">
+                    <label><input type="radio" name="optradio">Register as Local Business</label>
+                </div>
                 <button ng-click="model.register(model.user)" class="grey">Submit</button>
             </div>
             <div class="clear"></div>

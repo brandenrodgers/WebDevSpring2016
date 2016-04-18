@@ -1,0 +1,55 @@
+<div class="main no-margin-top">
+    <div class="wrap">
+        <div class="section group">
+            <div class="cont full-width span_3_of_3">
+                <h2 id="searchResultsTop" class="head"> Local Deals <span class="search-pages-top-info">Page: {{model.currentPage}}</span></h2>
+                <div ng-repeat="dealGroup in model.dealGroups" class="top-box">
+                    <div ng-repeat="deal in dealGroup" class="col_1_of_3 span_1_of_3">
+                        <a href="#/details/{{deal._id}}">
+                            <div class="inner_content clearfix">
+                                <div class="product_image">
+                                    <img class="deal-image" ng-src="{{deal.image_url}}" alt=""/>
+                                </div>
+                                <div class="price">
+                                    <div class="cart-left">
+                                        <p class="title">{{deal.short_title}}</p>
+                                        <div class="price1">
+                                            <span class="reducedfrom">${{(deal.price + deal.discount_amount).toFixed(2)}}</span>
+                                            <span class="actual">${{deal.price}}</span>
+                                        </div>
+                                    </div>
+                                    <a href="#/details/{{deal._id}}">
+                                        <div class="plus-right"></div>
+                                    </a>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="form search-pages-buttons">
+        <a ng-click="model.firstPage()" ng-class="{'search-invalid-button': model.currentPage == 1}"
+           class="btn btn-primary" role="button" type="submit">
+            <span class="glyphicon glyphicon-backward"></span>
+        </a>
+        <a ng-click="model.previousPage()" ng-class="{'search-invalid-button': model.currentPage == 1}"
+           class="btn btn-primary" role="button" type="submit">
+            <span class="glyphicon glyphicon-triangle-left"></span>
+        </a>
+        <span class="search-pages-bottom-info">{{model.currentPage}}/{{model.totalPages}}</span>
+        <a ng-click="model.nextPage()" ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+           class="btn btn-primary" role="button" type="submit">
+            <span class="glyphicon glyphicon-triangle-right"></span>
+        </a>
+        <a ng-click="model.lastPage()" ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+           class="btn btn-primary" role="button" type="submit">
+            <span class="glyphicon glyphicon-forward"></span>
+        </a>
+    </div>
+</div>

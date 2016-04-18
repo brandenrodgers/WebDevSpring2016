@@ -2,65 +2,175 @@
  * Created by branden on 3/4/16.
  */
 module.exports = function(app, dealModel, userModel) {
-    app.post("/api/cheapeats/user/:userId/deal/:dealId", userFavoritesDeal);
-    app.post("/api/cheapeats/user/:userId/deal/unfavorite/:dealId", userUnfavoritesDeal);
-    app.get("/api/cheapeats/deal/:dealId/user", findDealFavorites);
+    app.post("/api/cheapeats/deal", createDeal);
+    app.put("/api/cheapeats/deal/:id", updateDeal);
+    app.get("/api/cheapeats/deal/:id", getDealById);
+    app.get("/api/cheapeats/localsearch", findLocalDeals);
+    app.get("/api/cheapeats/deal/sqoot/:id", getDealBySqootId);
+    app.get("/api/cheapeats/user/:userId/deal/profile", getUserLocalDeals);
+    app.post("/api/cheapeats/user/deal/favorites", getUserFavorites);
+    app.post("/api/cheapeats/user/deal/favorite", userFavoritesDeal);
+    app.get("/api/cheapeats/favorites/deal/:dealId", findDealFavorites);
 
-    function userFavoritesDeal(req, res) {
-        var SqootDeal  = req.body;
-        var userId = req.params.userId;
-        var dealId = req.params.dealId;
-        var deal = dealModel.findDealById(dealId);
-        if(!deal) {
-            deal = dealModel.createDeal(SqootDeal);
-        }
-        deal.favorites.push(userId);
-        dealModel.updateDeal(dealId, deal);
 
-        var user = userModel.findUserById(userId);
-
-        user.favorites.push(dealId);
-        userModel.updateUser(userId, user);
-        res.send(200);
+    function createDeal(req, res){
+        var deal = req.body;
+        dealModel.createDeal(deal)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
-    function userUnfavoritesDeal(req, res) {
+    function getDealById(req, res){
+        var dealId = req.params.id;
+        dealModel.findDealById(dealId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function findLocalDeals(req, res){
+        dealModel.findLocalDeals()
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function getDealBySqootId(req, res){
+        var sqootId = req.params.id;
+        dealModel.findDealBySqootId(sqootId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function updateDeal(req, res){
+        var newDeal = req.body;
+        var dealId = req.params.id;
+        delete newDeal._id;
+        dealModel.updateDeal(dealId, newDeal)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function getUserLocalDeals(req, res){
         var userId = req.params.userId;
-        var dealId = req.params.dealId;
-        var deal = dealModel.findDealById(dealId);
+        dealModel.getUserLocalDeals(userId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
 
-        for(var i=0; i < deal.favorites.length; i++){
-            if (deal.favorites[i] == userId){
-                deal.favorites.splice(i, 1);
-                dealModel.updateDeal(dealId, deal);
-                break;
-            }
+    function getUserFavorites(req, res){
+        var dealIds = req.body;
+        dealModel.findDealsByIds(dealIds)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+
+    function userFavoritesDeal(req, res) {
+        var reqDeal  = req.body.deal;
+        var user = req.body.user;
+        var resultingId = null;
+        if (reqDeal.sqootId) {
+            dealModel
+                .findDealBySqootId(reqDeal.sqootId)
+                .then(
+                    function (deal) {
+                        if (deal._id) {
+                            return deal;
+                        } else {
+                            return dealModel.createDeal(reqDeal);
+                        }
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function (deal) {
+                        if (deal) {
+                            user.favorites.push(deal._id);
+                            resultingId = deal._id;
+                            return userModel.updateUser(user._id, user)
+                        }
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function (user) {
+                        res.json({resultingId: resultingId});
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+        } else {
+            user.favorites.push(reqDeal._id);
+            resultingId = reqDeal._id;
+            userModel.updateUser(user._id, user)
+               .then(
+                    function (user) {
+                        res.json({resultingId: resultingId});
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
         }
-
-        var user = userModel.findUserById(userId);
-
-        for(var x=0; i < user.favorites.length; i++){
-            if (user.favorites[x] == dealId){
-                user.favorites.splice(x, 1);
-                userModel.updateUser(userId, user);
-                break;
-            }
-        }
-
-        res.send(200);
     }
 
     function findDealFavorites (req, res) {
-        var dealId = parseInt(req.params.dealId);
-        var deal = dealModel.findDealById(dealId);
-        if(!deal) {
-            console.log("could not find deal by id");
-            res.json(null);
-        }
-        else {
-            var dealFavoritesIds = deal.favorites;
-            var users = userModel.findUsersByIds(dealFavoritesIds);
-            res.json(users);
-        }
+        var dealId = req.params.dealId;
+        userModel.findDealFavorites(dealId)
+            .then(
+                function (response) {
+                    res.json(response)
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
     }
+
 };

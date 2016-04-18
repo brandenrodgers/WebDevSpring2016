@@ -24,7 +24,6 @@ module.exports = function(db, mongoose) {
     return api;
 
     function createUser(user) {
-        console.log("creating user in model");
         return UserModel.create(user);
     }
 

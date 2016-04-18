@@ -62,7 +62,7 @@ app.get('/', function(req, res){
 });
 
 require('./public/assignment/server/app.js')(app, db, mongoose);
-require('./public/project/cheapeats/server/app.js')(app);
+require('./public/project/cheapeats/server/app.js')(app, db,mongoose);
 require('./public/experiments/telestrations/server/app.js')(app);
 
 app.listen(port, ipaddress, function(){

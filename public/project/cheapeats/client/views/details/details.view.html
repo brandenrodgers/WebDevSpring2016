@@ -9,7 +9,7 @@
                 <h3 class="m_3">{{model.data.title}}</h3>
                 <p class="m_5 details-price">${{model.data.price}}
                     <span class="reducedfrom details-reducedfrom">${{model.data.price + model.data.discount_amount}}</span>
-                    <a href="{{model.data.url}}" class="details-buy-button btn btn-primary" type="submit" role="button">Purchase</a>
+                    <a ng-hide="model.data.type == 'LOCAL'" href="{{model.data.url}}" class="details-buy-button btn btn-primary" type="submit" role="button">Purchase</a>
                 </p>
                 <div class="btn_form">
                     <form>
@@ -24,7 +24,7 @@
             <div class="clear"></div>
             <div class="toogle">
                 <h3 class="m_3">Deal Details</h3>
-                <div class="m_text" ng-bind-html="model.data.description">{{model.data.description}}</div>
+                <div class="m_text" ng-bind-html="model.data.sceDescription">{{model.data.sceDescription}}</div>
             </div>
             <div ng-if="model.dealFavoritesByUsers" class="toogle">
                 <h3 class="m_3">Other Users who Favorited this Deal</h3>
