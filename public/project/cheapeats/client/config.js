@@ -40,7 +40,7 @@
                 controllerAs: "model"
             })
             .when("/local", {
-                templateUrl: "views/localSearch/localsearch.view.html",
+                templateUrl: "views/localSearch/localSearch.view.html",
                 controller: "LocalSearchController",
                 controllerAs: "model",
                 resolve: {
