@@ -1,8 +1,7 @@
 /**
  * Created by branden on 3/16/16.
  */
-module.exports = function(app, db, mongoose) {
-    var userModel    = require("./models/user.model.server.js")(db, mongoose);
+module.exports = function(app, db, mongoose, userModel) {
     var formModel    = require("./models/form.model.server.js")(db, mongoose);
     var fieldModel   = require("./models/field.model.server.js")(db, mongoose);
 

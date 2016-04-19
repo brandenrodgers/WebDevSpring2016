@@ -61,9 +61,14 @@ app.get('/', function(req, res){
     res.sendfile((__dirname + '/index.html'));
 });
 
-require('./public/assignment/server/app.js')(app, db, mongoose);
-require('./public/project/cheapeats/server/app.js')(app, db,mongoose);
+// Had to do this for the passport issues
+var userProjectModel = require("./public/project/cheapeats/server/models/user.model.server.js")(db, mongoose);
+var userAssignmentModel = require("./public/assignment/server/models/user.model.server.js")(db, mongoose);
+
+require('./public/assignment/server/app.js')(app, db, mongoose, userAssignmentModel);
+require('./public/project/cheapeats/server/app.js')(app, db,mongoose, userProjectModel);
 require('./public/experiments/telestrations/server/app.js')(app);
+require('./public/security/security.js')(app, userAssignmentModel, userProjectModel);
 
 app.listen(port, ipaddress, function(){
     console.log('listening on: ' + ipaddress + ':' + port);

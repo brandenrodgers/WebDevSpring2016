@@ -15,7 +15,7 @@
             var searchInfo = {
                 location: "Boston",
                 radius: 15,
-                per_page: 6,
+                per_page: 10,
                 category_slugs: "restaurants",
                 order: "updated_at"
             };
@@ -32,11 +32,20 @@
             SqootService
                 .searchDeals(config)
                 .then(function(response) {
-                    vm.dealGroups = sortResults(response.data.deals);
+                    var uniqueDeals = removeDuplicates(response.data.deals);
+                    vm.dealGroups = groupResults(uniqueDeals);
+                    vm.dealGroups.splice(2, vm.dealGroups.length);
                 });
         }
 
-        function sortResults(deals){
+        function removeDuplicates(deals){
+            var seen = {};
+            return deals.filter(function(deal) {
+                return seen[deal.deal.title] ? false : (seen[deal.deal.title] = true);
+            });
+        }
+
+        function groupResults(deals){
             var result = [];
             for(var i=0; i < deals.length; i+=3){
                 result.push(deals.slice(i, i+3));

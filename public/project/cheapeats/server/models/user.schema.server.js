@@ -5,6 +5,10 @@
 module.exports = function(mongoose) {
 
     var userSchema = mongoose.Schema({
+        type: {
+            type: String,
+            default: 'project'
+        },
         username: String,
         password: String,
         email: String,

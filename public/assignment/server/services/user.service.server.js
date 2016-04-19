@@ -2,14 +2,10 @@
  * Created by branden on 3/16/16.
  */
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 
 module.exports = function(app, userModel) {
-    //passport.use('assignment', new LocalStrategy(localStrategy));
-    //passport.serializeUser(serializeUser);
-    //passport.deserializeUser(deserializeUser);
 
     var auth = authorized;
     app.post("/api/assignments/user", auth, createUser);
@@ -22,7 +18,7 @@ module.exports = function(app, userModel) {
 
     app.post("/api/assignments/register", registerUser);
     app.post("/api/assignments/logout", logoutUser);
-   // app.post("/api/assignments/login", passport.authenticate('assignment'), loginUser);
+    app.post("/api/assignments/login", passport.authenticate('assignment'), loginUser);
     app.get("/api/assignments/loggedin", loggedIn);
 
     function localStrategy(username, password, done) {
@@ -288,25 +284,6 @@ module.exports = function(app, userModel) {
         } else {
             next();
         }
-    }
-
-    function serializeUser(user, done) {
-        delete user.password;
-        done(null, user);
-    }
-
-    function deserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function(user){
-                    delete user.password;
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
     }
 
 };

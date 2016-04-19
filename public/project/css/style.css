@@ -3263,3 +3263,7 @@ a[type="submit"].details-buy-button{
 	color: white;
 	width: 100px;
 }
+
+.header-text {
+	font-size: 1.5em;
+}
