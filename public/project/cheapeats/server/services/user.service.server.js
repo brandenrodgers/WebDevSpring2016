@@ -75,7 +75,7 @@ module.exports = function(app, dealModel, userModel) {
         var newUser = req.body;
         var userId = req.params.userId;
         delete newUser._id;
-
+        newUser.favorites = [];
         if (newUser.password) {
             newUser.password = bcrypt.hashSync(newUser.password);
         }

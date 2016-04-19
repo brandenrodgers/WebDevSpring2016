@@ -40,15 +40,24 @@ module.exports = function(app, dealModel, userModel) {
     }
 
     function findLocalDeals(req, res){
-        dealModel.findLocalDeals()
+        dealModel.dropDeals()
             .then(
-                function (doc) {
-                    res.json(doc);
+                function(response){
+
                 },
-                function ( err ) {
-                    res.status(400).send(err);
+                function (err){
+
                 }
-            )
+            );
+        //dealModel.findLocalDeals()
+        //    .then(
+        //        function (doc) {
+        //            res.json(doc);
+        //        },
+        //        function ( err ) {
+        //            res.status(400).send(err);
+        //        }
+        //    )
     }
 
     function getDealBySqootId(req, res){
@@ -150,7 +159,8 @@ module.exports = function(app, dealModel, userModel) {
         } else {
             user.favorites.push(reqDeal._id);
             resultingId = reqDeal._id;
-            userModel.updateUser(user._id, user)
+            delete user._id
+            userModel.updateUser(userId, user)
                .then(
                     function (user) {
                         res.json({resultingId: resultingId});

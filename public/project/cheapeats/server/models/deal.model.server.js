@@ -16,7 +16,7 @@ module.exports = function(db, mongoose) {
         createDeal: createDeal,
         updateDeal: updateDeal,
         getUserLocalDeals: getUserLocalDeals,
-        findDealBySqootId: findDealBySqootId
+        findDealBySqootId: findDealBySqootId,
     };
     return api;
 
@@ -37,7 +37,7 @@ module.exports = function(db, mongoose) {
     }
 
     function createDeal(deal) {
-        return DealModel.create(deal);
+        return DealModel.find(deal._id).remove();
     }
 
     function updateDeal(dealId, deal) {
