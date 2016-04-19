@@ -40,24 +40,15 @@ module.exports = function(app, dealModel, userModel) {
     }
 
     function findLocalDeals(req, res){
-        dealModel.dropDeals()
+        dealModel.findLocalDeals()
             .then(
-                function(response){
-
+                function (doc) {
+                    res.json(doc);
                 },
-                function (err){
-
+                function ( err ) {
+                    res.status(400).send(err);
                 }
-            );
-        //dealModel.findLocalDeals()
-        //    .then(
-        //        function (doc) {
-        //            res.json(doc);
-        //        },
-        //        function ( err ) {
-        //            res.status(400).send(err);
-        //        }
-        //    )
+            )
     }
 
     function getDealBySqootId(req, res){

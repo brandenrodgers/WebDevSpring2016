@@ -37,7 +37,7 @@ module.exports = function(db, mongoose) {
     }
 
     function createDeal(deal) {
-        return DealModel.find({_id: deal._id}).remove();
+        return DealModel.create(deal);
     }
 
     function updateDeal(dealId, deal) {
