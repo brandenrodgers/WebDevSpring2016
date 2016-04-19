@@ -16,12 +16,17 @@ module.exports = function(db, mongoose) {
         updateUser: updateUser,
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
-        findDealFavorites: findDealFavorites
+        findDealFavorites: findDealFavorites,
+        removeDeletedDeal: removeDeletedDeal,
     };
     return api;
 
     function createUser(user) {
         return UserModel.create(user);
+    }
+
+    function removeDeletedDeal(dealId){
+        return UserModel.update({favorites: dealId}, {$pull: {favorites: dealId}}, {multi: true});
     }
 
     function findDealFavorites(dealId) {

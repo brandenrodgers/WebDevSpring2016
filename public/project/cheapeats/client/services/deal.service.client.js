@@ -10,6 +10,7 @@
         var api = {
             createDeal: createDeal,
             updateDeal: updateDeal,
+            deleteDeal: deleteDeal,
             getDealById: getDealById,
             findLocalDeals: findLocalDeals,
             getDealBySqootId: getDealBySqootId,
@@ -30,6 +31,10 @@
 
         function updateDeal(dealId, deal){
             return $http.put("/api/cheapeats/deal/" + dealId, deal);
+        }
+
+        function deleteDeal(dealId){
+            return $http.delete("/api/cheapeats/deal/" + dealId);
         }
 
         function findLocalDeals(){

@@ -26,6 +26,7 @@
                 <div class="register-error-txt" ng-show="model.errorMessage">{{model.errorMessage}}</div>
                 <button ng-hide="model.editing" ng-click="model.createDeal(model.deal)" class="grey">Create Deal</button>
                 <button ng-show="model.editing" ng-click="model.updateDeal(model.deal)" class="grey">Update Deal</button>
+                <button ng-show="model.editing" ng-click="model.deleteDeal(model.deal)" class="grey">Delete Deal</button>
             </div>
             <div class="clear"></div>
         </form>

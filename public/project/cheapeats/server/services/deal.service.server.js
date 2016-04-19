@@ -5,6 +5,7 @@ module.exports = function(app, dealModel, userModel) {
     app.post("/api/cheapeats/deal", createDeal);
     app.put("/api/cheapeats/deal/:id", updateDeal);
     app.get("/api/cheapeats/deal/:id", getDealById);
+    app.delete("/api/cheapeats/deal/:id", deleteDeal);
     app.get("/api/cheapeats/localsearch", findLocalDeals);
     app.get("/api/cheapeats/deal/sqoot/:id", getDealBySqootId);
     app.get("/api/cheapeats/user/:userId/deal/profile", getUserLocalDeals);
@@ -21,6 +22,27 @@ module.exports = function(app, dealModel, userModel) {
                     res.json(doc);
                 },
                 function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function deleteDeal(req, res){
+        var dealId = req.params.id;
+        dealModel.deleteDeal(dealId)
+            .then(
+                function (doc) {
+                    return userModel.removeDeletedDeal(dealId);
+                },
+                function ( err ) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(response){
+                    res.send(200);
+                },
+                function(err){
                     res.status(400).send(err);
                 }
             )

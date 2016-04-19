@@ -11,7 +11,7 @@
                     <span class="reducedfrom details-reducedfrom">${{model.data.price + model.data.discount_amount}}</span>
                     <a ng-hide="model.data.type == 'LOCAL'" href="{{model.data.url}}" class="details-buy-button btn btn-primary" type="submit" role="button">Purchase</a>
                 </p>
-                <div class="btn_form">
+                <div ng-show="currentUser.roles.indexOf('customer') > -1" class="btn_form">
                     <form>
                         <i ng-class="model.favorited ? 'fav-icon-clicked' : 'fav-icon-unclicked'" ng-click="model.favoriteDeal(model.data)" class="glyphicon glyphicon-heart"></i>
                         <span ng-hide="model.favorited">Favorite</span>

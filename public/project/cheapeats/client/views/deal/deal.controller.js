@@ -18,6 +18,7 @@
 
         vm.createDeal = createDeal;
         vm.updateDeal = updateDeal;
+        vm.deleteDeal = deleteDeal;
 
         function init() {
             if (!vm.dealId) {
@@ -77,6 +78,19 @@
                         }
                     });
             }
+        }
+
+        function deleteDeal(deal) {
+            DealService
+                .deleteDeal(deal._id)
+                .then(function (response) {
+                    $location.url("/profile/" + vm.currentUser.username);
+                },
+                function(err) {
+                        vm.errorMessage = "Error deleting Deal"
+                    }
+                );
+
         }
 
         function checkFormInputs(deal){

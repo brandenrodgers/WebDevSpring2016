@@ -15,6 +15,7 @@ module.exports = function(db, mongoose) {
         findLocalDeals: findLocalDeals,
         createDeal: createDeal,
         updateDeal: updateDeal,
+        deleteDeal: deleteDeal,
         getUserLocalDeals: getUserLocalDeals,
         findDealBySqootId: findDealBySqootId,
     };
@@ -38,6 +39,10 @@ module.exports = function(db, mongoose) {
 
     function createDeal(deal) {
         return DealModel.create(deal);
+    }
+
+    function deleteDeal(dealId) {
+        return DealModel.find({_id: dealId}).remove();
     }
 
     function updateDeal(dealId, deal) {
