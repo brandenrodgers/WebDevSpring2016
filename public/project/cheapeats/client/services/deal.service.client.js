@@ -21,7 +21,7 @@
         return api;
 
         function userFavoritesDeal(user, deal) {
-            return $http.post("/api/cheapeats/user/deal/favorite", {user: user, deal: deal});
+            return $http.post("/api/cheapeats/user/deal/favorite/" + user._id, {user: user, deal: deal});
         }
 
         function createDeal(deal) {

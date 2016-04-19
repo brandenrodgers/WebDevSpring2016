@@ -9,7 +9,7 @@ module.exports = function(app, dealModel, userModel) {
     app.get("/api/cheapeats/deal/sqoot/:id", getDealBySqootId);
     app.get("/api/cheapeats/user/:userId/deal/profile", getUserLocalDeals);
     app.post("/api/cheapeats/user/deal/favorites", getUserFavorites);
-    app.post("/api/cheapeats/user/deal/favorite", userFavoritesDeal);
+    app.post("/api/cheapeats/user/deal/favorite/:userId", userFavoritesDeal);
     app.get("/api/cheapeats/favorites/deal/:dealId", findDealFavorites);
 
 
@@ -109,6 +109,7 @@ module.exports = function(app, dealModel, userModel) {
     function userFavoritesDeal(req, res) {
         var reqDeal  = req.body.deal;
         var user = req.body.user;
+        var userId = req.params.userId;
         var resultingId = null;
         if (reqDeal.sqootId) {
             dealModel
@@ -130,7 +131,8 @@ module.exports = function(app, dealModel, userModel) {
                         if (deal) {
                             user.favorites.push(deal._id);
                             resultingId = deal._id;
-                            return userModel.updateUser(user._id, user)
+                            delete user._id;
+                            return userModel.updateUser(userId, user)
                         }
                     },
                     function (err) {
