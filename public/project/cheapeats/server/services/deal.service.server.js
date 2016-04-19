@@ -150,7 +150,7 @@ module.exports = function(app, dealModel, userModel) {
         } else {
             user.favorites.push(reqDeal._id);
             resultingId = reqDeal._id;
-            delete user._id
+            delete user._id;
             userModel.updateUser(userId, user)
                .then(
                     function (user) {

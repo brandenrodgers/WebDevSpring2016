@@ -53,20 +53,20 @@
             <div class="clear"></div>
     </div>
     <div class="form search-pages-buttons">
-        <a ng-click="model.firstPage()" ng-class="{'search-invalid-button': model.currentPage == 1}"
+        <a ng-click="model.firstPage()"
            class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-backward"></span>
         </a>
-        <a ng-click="model.previousPage()" ng-class="{'search-invalid-button': model.currentPage == 1}"
+        <a ng-click="model.previousPage()"
            class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-triangle-left"></span>
         </a>
         <span class="search-pages-bottom-info">{{model.currentPage}}/{{model.totalPages}}</span>
-        <a ng-click="model.nextPage()" ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+        <a ng-click="model.nextPage()"
            class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-triangle-right"></span>
         </a>
-        <a ng-click="model.lastPage()" ng-class="{'search-invalid-button': model.currentPage == model.totalPages}"
+        <a ng-click="model.lastPage()"
            class="btn btn-primary" role="button" type="submit">
             <span class="glyphicon glyphicon-forward"></span>
         </a>

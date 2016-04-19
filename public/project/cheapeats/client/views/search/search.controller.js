@@ -6,8 +6,6 @@
         .module("CheapEatsApp")
         .controller("SearchController", searchController);
 
-    var currentPage = 1;
-
     function searchController(SqootService, $location, $anchorScroll) {
         var vm = this;
 
@@ -21,7 +19,7 @@
         vm.errorMessage = null;
         vm.dealGroups = [];
         vm.currentSearchInfo = {};
-        vm.currentPage = currentPage;
+        vm.currentPage = 1;
         vm.totalPages = 0;
 
         function init() {
